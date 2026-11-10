@@ -1,0 +1,15 @@
+{
+  "_comentario": "Arquivo de EXEMPLO criado na parte 01. O integrante 03 deve substituir pelo cenário completo (12 a 15 famílias). Todos os dados são fictícios.",
+  "familias": [
+    { "id": 1, "regiao": "Zona A", "moradores": 3, "idosos": 1, "pcd": 1, "mobilidadeReduzida": true, "possuiTransporte": false, "necessitaTransporteAdaptado": true, "abrigoId": null },
+    { "id": 2, "regiao": "Zona B", "moradores": 4, "idosos": 0, "pcd": 0, "mobilidadeReduzida": false, "possuiTransporte": true, "necessitaTransporteAdaptado": false, "abrigoId": null }
+  ],
+  "abrigos": [
+    { "id": 1, "nome": "Abrigo Central", "capacidade": 30, "vagasDisponiveis": 30, "acessivel": true, "distancia": 2.5, "ativo": true },
+    { "id": 2, "nome": "Escola Municipal", "capacidade": 20, "vagasDisponiveis": 20, "acessivel": false, "distancia": 4, "ativo": true }
+  ],
+  "veiculos": [
+    { "id": 1, "tipo": "adaptado", "capacidade": 4, "disponivel": true, "regiao": "Zona A" },
+    { "id": 2, "tipo": "convencional", "capacidade": 5, "disponivel": true, "regiao": "Zona B" }
+  ]
+}
