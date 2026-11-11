@@ -1,7 +1,6 @@
 import { getRegionState } from './scenario.js';
 
-// Regras simplificadas do protótipo acadêmico. Distâncias em quilômetros.
-// Uma rota liberada representa deslocamento antes de ser tomada pela água.
+// No cenário, uma rota liberada ainda permite sair antes de a água bloquear o acesso.
 export const MAX_WALK_DISTANCE = 1.5;
 
 export function needsAccessibleShelter(family) {
@@ -9,29 +8,63 @@ export function needsAccessibleShelter(family) {
 }
 
 export function canUseOwnTransport(family) {
-  return family.possuiTransporte && (!family.necessitaTransporteAdaptado || family.transporteProprioAdaptado);
+  if (!family.possuiTransporte) {
+    return false;
+  }
+
+  if (family.necessitaTransporteAdaptado && !family.transporteProprioAdaptado) {
+    return false;
+  }
+
+  return true;
 }
 
 export function canWalk(family, distance) {
-  return family.idosos === 0 && !needsAccessibleShelter(family) && distance <= MAX_WALK_DISTANCE;
+  if (family.idosos > 0 || needsAccessibleShelter(family)) {
+    return false;
+  }
+
+  return distance <= MAX_WALK_DISTANCE;
 }
 
-// Ordem explícita, sem pesos ocultos: adaptado, mobilidade/PCD, idosos, demais.
 export function evacuationPriority(family) {
-  if (family.necessitaTransporteAdaptado) return 3;
-  if (needsAccessibleShelter(family)) return 2;
-  if (family.idosos > 0) return 1;
+  if (family.necessitaTransporteAdaptado) {
+    return 3;
+  }
+
+  if (needsAccessibleShelter(family)) {
+    return 2;
+  }
+
+  if (family.idosos > 0) {
+    return 1;
+  }
+
   return 0;
 }
 
 export function isShelterAvailable(shelter, level, regions) {
+  if (!shelter.ativo || level >= shelter.alagaNoNivel) {
+    return false;
+  }
+
   const region = regions.find((item) => item.id === shelter.regiao);
-  return shelter.ativo && level < shelter.alagaNoNivel && getRegionState(region, level) !== 'isolada';
+  return getRegionState(region, level) !== 'isolada';
 }
 
 export function canUseVehicle(family, vehicle, shelterId) {
-  return vehicle.disponivel && vehicle.regiao === family.regiao
-    && (!family.necessitaTransporteAdaptado || vehicle.tipo === 'adaptado')
-    && vehicle.lugaresRestantes >= family.moradores
-    && (vehicle.abrigoId === null || vehicle.abrigoId === shelterId);
+  if (!vehicle.disponivel || vehicle.regiao !== family.regiao) {
+    return false;
+  }
+
+  if (family.necessitaTransporteAdaptado && vehicle.tipo !== 'adaptado') {
+    return false;
+  }
+
+  if (vehicle.lugaresRestantes < family.moradores) {
+    return false;
+  }
+
+  // Uma viagem pode ser compartilhada, desde que todos sigam para o mesmo abrigo.
+  return vehicle.abrigoId === null || vehicle.abrigoId === shelterId;
 }

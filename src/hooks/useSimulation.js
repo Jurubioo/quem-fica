@@ -8,22 +8,35 @@ export default function useSimulation() {
   const [simulation, setSimulation] = useState(null);
   const [simulationError, setSimulationError] = useState('');
 
-  function changeLevel(value) {
-    setLevel(value);
+  function changeLevel(newLevel) {
+    setLevel(newLevel);
     setSimulation(null);
     setSimulationError('');
   }
 
   function execute() {
-    if (!scenario) return;
+    if (!scenario) {
+      return;
+    }
+
     try {
-      setSimulation(runSimulation(scenario, level));
+      const result = runSimulation(scenario, level);
+      setSimulation(result);
       setSimulationError('');
-    } catch (cause) {
+    } catch (error) {
       setSimulation(null);
-      setSimulationError(cause.message || 'Não foi possível executar a simulação.');
+      setSimulationError(error.message || 'Não foi possível executar a simulação.');
     }
   }
 
-  return { scenario, error, reload, level, changeLevel, simulation, simulationError, execute };
+  return {
+    scenario,
+    error,
+    reload,
+    level,
+    changeLevel,
+    simulation,
+    simulationError,
+    execute,
+  };
 }
