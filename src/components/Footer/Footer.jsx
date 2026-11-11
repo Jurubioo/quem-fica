@@ -75,13 +75,13 @@ export default function Footer() {
   return (
     <Wrap>
       <div className="container">
-        <div className="row g-5">
+        <div className="row gy-5 gx-4">
           <div className="col-12 col-lg-5">
             <Logo light />
             <Tagline>Planejar para ninguém ficar para trás.</Tagline>
           </div>
 
-          <nav className="col-6 col-lg-3" aria-label="Menu do rodapé">
+          <nav className="col-12 col-sm-6 col-lg-3" aria-label="Menu do rodapé">
             <Heading>Páginas</Heading>
             <LinkList>
               {navLinks.map(({ to, label }) => (
@@ -92,7 +92,7 @@ export default function Footer() {
             </LinkList>
           </nav>
 
-          <div className="col-6 col-lg-4">
+          <div className="col-12 col-sm-6 col-lg-4">
             <Heading>Em uma emergência real</Heading>
             <Emergency>
               <p>

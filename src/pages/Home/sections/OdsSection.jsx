@@ -1,11 +1,29 @@
 import styled from 'styled-components';
 import { Eyebrow, Section, Title } from '../../../components/UI/Section';
 
-// Cores oficiais dos ODS (ONU). `text` garante contraste do número.
+// Cada ODS usa sua cor de identificação e uma cor de texto para o número.
 const ODS = [
-  { num: 10, name: 'Redução das desigualdades', text: 'Inclui idosos, pessoas com deficiência e famílias vulneráveis no plano.', color: '#DD1367', ink: '#fff' },
-  { num: 11, name: 'Cidades e comunidades sustentáveis', text: 'Apoia cidades mais seguras e preparadas para desastres.', color: '#FD9D24', ink: '#14202B' },
-  { num: 13, name: 'Ação contra a mudança global do clima', text: 'Ajuda na preparação para eventos climáticos extremos.', color: '#3F7E44', ink: '#fff' },
+  {
+    num: 10,
+    name: 'Redução das desigualdades',
+    text: 'Inclui idosos, pessoas com deficiência e famílias vulneráveis no plano.',
+    color: '#DD1367',
+    ink: '#fff',
+  },
+  {
+    num: 11,
+    name: 'Cidades e comunidades sustentáveis',
+    text: 'Apoia cidades mais seguras e preparadas para desastres.',
+    color: '#FD9D24',
+    ink: '#14202B',
+  },
+  {
+    num: 13,
+    name: 'Ação contra a mudança global do clima',
+    text: 'Ajuda na preparação para eventos climáticos extremos.',
+    color: '#3F7E44',
+    ink: '#fff',
+  },
 ];
 
 const Wrap = styled(Section)`
@@ -26,6 +44,8 @@ const List = styled.ul`
 `;
 
 const Card = styled.li`
+  min-width: 0;
+  overflow-wrap: anywhere;
   display: flex;
   gap: 1.1rem;
   align-items: flex-start;
@@ -57,6 +77,10 @@ const Card = styled.li`
     margin: 0;
     font-size: 1rem;
     color: ${({ theme }) => theme.colors.inkSoft};
+  }
+
+  @media (max-width: 575px) {
+    flex-direction: column;
   }
 `;
 

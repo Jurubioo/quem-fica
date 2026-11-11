@@ -22,15 +22,58 @@ const LEVELS = [
 
 // altura = a partir de qual nível de água a casa é atingida
 const FAMILIES = [
-  { id: 1, x: 80, ground: 290, altura: 1, titulo: 'Idosa que mora sozinha', detalhe: '78 anos, usa andador e não tem carro.', precisaAjuda: true },
-  { id: 2, x: 220, ground: 290, altura: 1, titulo: 'Casal com carro', detalhe: 'Sai de carro assim que recebe o alerta.', precisaAjuda: false },
-  { id: 3, x: 410, ground: 250, altura: 2, titulo: 'Estudantes', detalhe: 'Dividem a casa e vão a pé até o abrigo.', precisaAjuda: false },
-  { id: 4, x: 540, ground: 250, altura: 2, titulo: 'Mãe e filho cadeirante', detalhe: 'Sem carro, precisam de transporte adaptado.', precisaAjuda: true },
-  { id: 5, x: 700, ground: 200, altura: 3, titulo: 'Família com três filhos', detalhe: 'Têm carro e saem juntos.', precisaAjuda: false },
+  {
+    id: 1,
+    x: 80,
+    ground: 290,
+    altura: 1,
+    titulo: 'Idosa que mora sozinha',
+    detalhe: '78 anos, usa andador e não tem carro.',
+    precisaAjuda: true,
+  },
+  {
+    id: 2,
+    x: 220,
+    ground: 290,
+    altura: 1,
+    titulo: 'Casal com carro',
+    detalhe: 'Sai de carro assim que recebe o alerta.',
+    precisaAjuda: false,
+  },
+  {
+    id: 3,
+    x: 410,
+    ground: 250,
+    altura: 2,
+    titulo: 'Estudantes',
+    detalhe: 'Dividem a casa e vão a pé até o abrigo.',
+    precisaAjuda: false,
+  },
+  {
+    id: 4,
+    x: 540,
+    ground: 250,
+    altura: 2,
+    titulo: 'Mãe e filho cadeirante',
+    detalhe: 'Sem carro, precisam de transporte adaptado.',
+    precisaAjuda: true,
+  },
+  {
+    id: 5,
+    x: 700,
+    ground: 200,
+    altura: 3,
+    titulo: 'Família com três filhos',
+    detalhe: 'Têm carro e saem juntos.',
+    precisaAjuda: false,
+  },
 ];
 
 function getStatus(family, level) {
-  if (level < family.altura) return 'seco';
+  if (level < family.altura) {
+    return 'seco';
+  }
+
   return family.precisaAjuda ? 'ajuda' : 'sai';
 }
 
@@ -43,11 +86,13 @@ const STATUS_INFO = {
 // Onda do topo da água: sobe e desce a cada 75 unidades (período de 150)
 const WAVE = `M-150 0 ${'q37.5 -9 75 0 t75 0 '.repeat(8)}V400 H-150 Z`;
 
-/* ---------------- estilos ---------------- */
-
 const flow = keyframes`
-  from { transform: translateX(0); }
-  to   { transform: translateX(150px); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(150px);
+  }
 `;
 
 const ping = keyframes`
@@ -130,6 +175,7 @@ const RoundButton = styled.button`
 
 const Range = styled.input`
   flex: 1;
+  min-width: 0;
   appearance: none;
   height: 0.9rem;
   border-radius: 999px;
@@ -267,8 +313,6 @@ const Closing = styled.p`
   }
 `;
 
-/* ---------------- desenho de uma casa ---------------- */
-
 function House({ family, colors }) {
   const { x, ground, id } = family;
 
@@ -303,20 +347,32 @@ function Badge({ family, colors }) {
   );
 }
 
-/* ---------------- componente ---------------- */
-
 export default function StreetDemo() {
   const theme = useTheme();
-  const { colors } = theme;
-  const { scene } = theme;
+  const { colors, scene } = theme;
   const [level, setLevel] = useState(1);
 
-  const families = FAMILIES.map((f) => ({ ...f, status: getStatus(f, level) }));
-  const atingidas = families.filter((f) => f.status !== 'seco').length;
-  const saem = families.filter((f) => f.status === 'sai').length;
-  const ficam = families.filter((f) => f.status === 'ajuda').length;
+  const families = FAMILIES.map((family) => ({
+    ...family,
+    status: getStatus(family, level),
+  }));
+  const affectedCount = families.filter((family) => family.status !== 'seco').length;
+  const independentCount = families.filter((family) => family.status === 'sai').length;
+  const needsHelpCount = families.filter((family) => family.status === 'ajuda').length;
 
   const fill = `${(level / (LEVELS.length - 1)) * 100}%`;
+
+  function decreaseLevel() {
+    setLevel((currentLevel) => Math.max(currentLevel - 1, 0));
+  }
+
+  function increaseLevel() {
+    setLevel((currentLevel) => Math.min(currentLevel + 1, LEVELS.length - 1));
+  }
+
+  function handleLevelChange(event) {
+    setLevel(Number(event.target.value));
+  }
 
   return (
     <Section aria-labelledby="demo-titulo" style={{ background: theme.gradients.sky }}>
@@ -329,7 +385,7 @@ export default function StreetDemo() {
           <Scene
             viewBox="0 0 900 340"
             role="img"
-            aria-label={`Ilustração de uma rua com 5 casas e um abrigo no alto. Nível da água: ${LEVELS[level].label}. ${atingidas} de 5 casas atingidas.`}
+            aria-label={`Ilustração de uma rua com 5 casas e um abrigo no alto. Nível da água: ${LEVELS[level].label}. ${affectedCount} de 5 casas atingidas.`}
           >
             <defs>
               <linearGradient id="demo-ceu" x1="0" y1="0" x2="0" y2="1">
@@ -350,8 +406,8 @@ export default function StreetDemo() {
               </text>
             </g>
 
-            {families.map((f) => (
-              <House key={f.id} family={f} colors={colors} />
+            {families.map((family) => (
+              <House key={family.id} family={family} colors={colors} />
             ))}
 
             {/* água: o grupo inteiro desce/sobe conforme o nível */}
@@ -375,8 +431,8 @@ export default function StreetDemo() {
               strokeWidth="3"
             />
 
-            {families.map((f) => (
-              <Badge key={f.id} family={f} colors={colors} />
+            {families.map((family) => (
+              <Badge key={family.id} family={family} colors={colors} />
             ))}
           </Scene>
 
@@ -389,7 +445,7 @@ export default function StreetDemo() {
                 <SliderRow>
                   <RoundButton
                     type="button"
-                    onClick={() => setLevel((l) => Math.max(l - 1, 0))}
+                    onClick={decreaseLevel}
                     disabled={level === 0}
                     aria-label="Baixar o nível da água"
                   >
@@ -402,13 +458,13 @@ export default function StreetDemo() {
                     max={LEVELS.length - 1}
                     step="1"
                     value={level}
-                    onChange={(e) => setLevel(Number(e.target.value))}
+                    onChange={handleLevelChange}
                     aria-valuetext={LEVELS[level].label}
                     style={{ '--fill': fill }}
                   />
                   <RoundButton
                     type="button"
-                    onClick={() => setLevel((l) => Math.min(l + 1, LEVELS.length - 1))}
+                    onClick={increaseLevel}
                     disabled={level === LEVELS.length - 1}
                     aria-label="Subir o nível da água"
                   >
@@ -426,15 +482,15 @@ export default function StreetDemo() {
               <div className="col-12 col-lg-5">
                 <Summary aria-live="polite" aria-atomic="true">
                   <Chip $tone="neutral">
-                    <b>{atingidas}</b> de 5 atingidas
+                    <b>{affectedCount}</b> de 5 atingidas
                   </Chip>
                   <Chip $tone="safe">
                     <IconCheck size={20} />
-                    <b>{saem}</b> saem sozinhas
+                    <b>{independentCount}</b> saem sozinhas
                   </Chip>
                   <Chip $tone="risk">
                     <IconAlert size={20} />
-                    <b>{ficam}</b> precisam de ajuda
+                    <b>{needsHelpCount}</b> precisam de ajuda
                   </Chip>
                 </Summary>
               </div>
@@ -443,23 +499,23 @@ export default function StreetDemo() {
         </Stage>
 
         <FamilyList aria-label="Situação de cada família">
-          {families.map((f) => {
-            const info = STATUS_INFO[f.status];
+          {families.map((family) => {
+            const info = STATUS_INFO[family.status];
             return (
-              <FamilyCard key={f.id} $tone={info.tone}>
+              <FamilyCard key={family.id} $tone={info.tone}>
                 <h3>
                   <span className="num" aria-hidden="true">
-                    {f.id}
+                    {family.id}
                   </span>
                   <span>
-                    <span className="visually-hidden">Casa {f.id}: </span>
-                    {f.titulo}
+                    <span className="visually-hidden">Casa {family.id}: </span>
+                    {family.titulo}
                   </span>
                 </h3>
-                <p>{f.detalhe}</p>
+                <p>{family.detalhe}</p>
                 <Status $tone={info.tone}>
-                  {f.status === 'sai' && <IconCheck size={16} />}
-                  {f.status === 'ajuda' && <IconAlert size={16} />}
+                  {family.status === 'sai' && <IconCheck size={16} />}
+                  {family.status === 'ajuda' && <IconAlert size={16} />}
                   {info.label}
                 </Status>
               </FamilyCard>

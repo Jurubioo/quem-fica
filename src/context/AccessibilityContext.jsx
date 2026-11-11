@@ -38,15 +38,40 @@ export function AccessibilityProvider({ children }) {
 
   const maxStep = FONT_SCALES.length - 1;
 
+  function increaseFont() {
+    setPrefs((previousPrefs) => ({
+      ...previousPrefs,
+      fontStep: Math.min(previousPrefs.fontStep + 1, maxStep),
+    }));
+  }
+
+  function decreaseFont() {
+    setPrefs((previousPrefs) => ({
+      ...previousPrefs,
+      fontStep: Math.max(previousPrefs.fontStep - 1, 0),
+    }));
+  }
+
+  function resetFont() {
+    setPrefs((previousPrefs) => ({ ...previousPrefs, fontStep: 0 }));
+  }
+
+  function toggleContrast() {
+    setPrefs((previousPrefs) => ({
+      ...previousPrefs,
+      highContrast: !previousPrefs.highContrast,
+    }));
+  }
+
   const value = {
     ...prefs,
     fontPercent: Math.round(FONT_SCALES[prefs.fontStep] * 100),
     canIncrease: prefs.fontStep < maxStep,
     canDecrease: prefs.fontStep > 0,
-    increaseFont: () => setPrefs((p) => ({ ...p, fontStep: Math.min(p.fontStep + 1, maxStep) })),
-    decreaseFont: () => setPrefs((p) => ({ ...p, fontStep: Math.max(p.fontStep - 1, 0) })),
-    resetFont: () => setPrefs((p) => ({ ...p, fontStep: 0 })),
-    toggleContrast: () => setPrefs((p) => ({ ...p, highContrast: !p.highContrast })),
+    increaseFont,
+    decreaseFont,
+    resetFont,
+    toggleContrast,
   };
 
   return <AccessibilityContext.Provider value={value}>{children}</AccessibilityContext.Provider>;

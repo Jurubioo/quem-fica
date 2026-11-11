@@ -4,8 +4,12 @@ import { Eyebrow } from '../../../components/UI/Section';
 import { IconAlert, IconArrowRight, IconCheck, IconWave } from '../../../components/Icons/Icons';
 
 const drift = keyframes`
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 `;
 
 const Wrap = styled.section`
@@ -50,8 +54,6 @@ const Actions = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
 `;
-
-/* ---------- Cartão de exemplo à direita ---------- */
 
 const ResultCard = styled.aside`
   background: ${({ theme }) => theme.colors.surface};
@@ -121,8 +123,6 @@ const CardNote = styled.p`
   color: ${({ theme }) => theme.colors.inkSoft};
 `;
 
-/* ---------- Ondas no rodapé do hero ---------- */
-
 const Waves = styled.div`
   position: absolute;
   left: 0;
@@ -160,7 +160,7 @@ export default function Hero() {
   return (
     <Wrap aria-labelledby="hero-titulo">
       <div className="container">
-        <div className="row align-items-center g-5">
+        <div className="row align-items-center gy-5 gx-4">
           <div className="col-12 col-lg-7">
             <Eyebrow $light>
               <IconWave size={20} />

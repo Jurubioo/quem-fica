@@ -22,6 +22,7 @@ const GlobalStyles = createGlobalStyle`
   }
 
   h1, h2, h3, h4 {
+    overflow-wrap: anywhere;
     font-family: ${({ theme }) => theme.fonts.heading};
     font-weight: 700;
     line-height: 1.15;
