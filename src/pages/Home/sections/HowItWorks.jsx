@@ -14,9 +14,21 @@ import {
 } from '../../../components/Icons/Icons';
 
 const STEPS = [
-  { icon: IconWave, title: 'Simule a enchente', text: 'Escolha a região e o nível da água.' },
-  { icon: IconSearchPerson, title: 'Veja quem fica', text: 'O sistema mostra quais famílias não têm como chegar a um abrigo seguro.' },
-  { icon: IconShelter, title: 'Teste soluções', text: 'Adicione um veículo adaptado ou um novo abrigo e compare o antes e o depois.' },
+  {
+    icon: IconWave,
+    title: 'Simule a enchente',
+    text: 'Escolha a região e o nível da água.',
+  },
+  {
+    icon: IconSearchPerson,
+    title: 'Veja quem fica',
+    text: 'O sistema mostra quais famílias não têm como chegar a um abrigo seguro.',
+  },
+  {
+    icon: IconShelter,
+    title: 'Teste soluções',
+    text: 'Adicione um veículo adaptado ou um novo abrigo e compare o antes e o depois.',
+  },
 ];
 
 const USERS = [

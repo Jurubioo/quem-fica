@@ -39,10 +39,21 @@ export default function Header() {
 
   // Fecha o menu com a tecla Esc
   useEffect(() => {
-    if (!menuOpen) return undefined;
-    const onKey = (e) => e.key === 'Escape' && setMenuOpen(false);
-    window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    if (!menuOpen) {
+      return;
+    }
+
+    function handleKeyDown(event) {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+      }
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
   }, [menuOpen]);
 
   return (

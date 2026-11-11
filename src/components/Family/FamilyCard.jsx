@@ -1,19 +1,6 @@
 import styled from 'styled-components';
-import { getFamilyNeeds, STATUS_SYMBOLS } from '../../utils/scenario';
-
-export const Situation = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  width: fit-content;
-  padding: 0.3rem 0.6rem;
-  border: 1px solid currentColor;
-  border-radius: ${({ theme }) => theme.radius.sm};
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: ${({ theme, $status }) => theme.colors[$status === 'pending' ? 'water' : $status]};
-  background: ${({ theme, $status }) => theme.colors[$status === 'pending' ? 'surfaceAlt' : `${$status}Bg`]};
-`;
+import { getFamilyNeeds } from '../../utils/scenario';
+import FamilyStatus from './FamilyStatus';
 
 const Card = styled.li`
   min-width: 0;
@@ -22,7 +9,12 @@ const Card = styled.li`
   border-radius: ${({ theme }) => theme.radius.md};
   background: ${({ theme }) => theme.colors.surface};
   overflow-wrap: anywhere;
-  p { margin: 0.4rem 0 0.8rem; font-size: 1rem; }
+
+  p {
+    margin: 0.4rem 0 0.8rem;
+    font-size: 1rem;
+  }
+
   button {
     display: block;
     min-height: 2.75rem;
@@ -38,15 +30,26 @@ const Card = styled.li`
 `;
 
 export default function FamilyCard({ family, region, situation, selected, onSelect }) {
+  const number = String(family.id).padStart(2, '0');
+  const residentsLabel = family.moradores === 1 ? 'morador' : 'moradores';
   const needs = getFamilyNeeds(family);
+  const needsDescription = needs.length > 0
+    ? needs.join(' · ')
+    : 'Sem necessidade específica de apoio.';
+
   return (
     <Card $selected={selected}>
-      <button type="button" onClick={() => onSelect(family.id)} aria-pressed={selected} aria-controls="detalhes-familia">
-        Família {String(family.id).padStart(2, '0')} · {family.nome}
+      <button
+        type="button"
+        onClick={() => onSelect(family.id)}
+        aria-pressed={selected}
+        aria-controls="detalhes-familia"
+      >
+        Família {number} · {family.nome}
       </button>
-      <p>{region.nome} · {family.moradores} {family.moradores === 1 ? 'morador' : 'moradores'}</p>
-      <Situation $status={situation.status}><span aria-hidden="true">{STATUS_SYMBOLS[situation.status]}</span>{situation.label}</Situation>
-      <p>{needs.length ? needs.join(' · ') : 'Sem necessidade específica de apoio.'}</p>
+      <p>{region.nome} · {family.moradores} {residentsLabel}</p>
+      <FamilyStatus situation={situation} />
+      <p>{needsDescription}</p>
     </Card>
   );
 }

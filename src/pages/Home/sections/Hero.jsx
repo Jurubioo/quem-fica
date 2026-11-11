@@ -4,8 +4,12 @@ import { Eyebrow } from '../../../components/UI/Section';
 import { IconAlert, IconArrowRight, IconCheck, IconWave } from '../../../components/Icons/Icons';
 
 const drift = keyframes`
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
 `;
 
 const Wrap = styled.section`
@@ -50,8 +54,6 @@ const Actions = styled.div`
   flex-wrap: wrap;
   gap: 1rem;
 `;
-
-/* ---------- Cartão de exemplo à direita ---------- */
 
 const ResultCard = styled.aside`
   background: ${({ theme }) => theme.colors.surface};
@@ -120,8 +122,6 @@ const CardNote = styled.p`
   margin: 0;
   color: ${({ theme }) => theme.colors.inkSoft};
 `;
-
-/* ---------- Ondas no rodapé do hero ---------- */
 
 const Waves = styled.div`
   position: absolute;
