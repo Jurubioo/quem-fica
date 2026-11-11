@@ -1,15 +1,399 @@
 {
-  "_comentario": "Arquivo de EXEMPLO criado na parte 01. O integrante 03 deve substituir pelo cenário completo (12 a 15 famílias). Todos os dados são fictícios.",
+  "nome": "Bairro Esperança",
+  "_comentario": "Cenário acadêmico fictício. Níveis 0 a 3; o limiar 4 significa que o evento não ocorre neste cenário. Distâncias em km; capacidades em pessoas.",
+  "regioes": [
+    {
+      "id": "A",
+      "nome": "Vila do Rio",
+      "x": 20,
+      "y": 20,
+      "largura": 410,
+      "altura": 230,
+      "alagaNoNivel": 1,
+      "isolaNoNivel": 3,
+      "rotasAbrigos": [
+        {
+          "abrigoId": 1,
+          "distancia": 1.2,
+          "bloqueiaNoNivel": 3
+        },
+        {
+          "abrigoId": 2,
+          "distancia": 2.8,
+          "bloqueiaNoNivel": 3
+        }
+      ]
+    },
+    {
+      "id": "B",
+      "nome": "Centro",
+      "x": 480,
+      "y": 20,
+      "largura": 400,
+      "altura": 230,
+      "alagaNoNivel": 2,
+      "isolaNoNivel": 4,
+      "rotasAbrigos": [
+        {
+          "abrigoId": 2,
+          "distancia": 0.8,
+          "bloqueiaNoNivel": 4
+        },
+        {
+          "abrigoId": 3,
+          "distancia": 2.2,
+          "bloqueiaNoNivel": 4
+        }
+      ]
+    },
+    {
+      "id": "C",
+      "nome": "Jardim das Pontes",
+      "x": 20,
+      "y": 310,
+      "largura": 410,
+      "altura": 230,
+      "alagaNoNivel": 2,
+      "isolaNoNivel": 3,
+      "rotasAbrigos": [
+        {
+          "abrigoId": 1,
+          "distancia": 1.8,
+          "bloqueiaNoNivel": 3
+        },
+        {
+          "abrigoId": 3,
+          "distancia": 3.2,
+          "bloqueiaNoNivel": 3
+        }
+      ]
+    },
+    {
+      "id": "D",
+      "nome": "Colina Verde",
+      "x": 480,
+      "y": 310,
+      "largura": 400,
+      "altura": 230,
+      "alagaNoNivel": 3,
+      "isolaNoNivel": 4,
+      "rotasAbrigos": [
+        {
+          "abrigoId": 3,
+          "distancia": 0.7,
+          "bloqueiaNoNivel": 4
+        },
+        {
+          "abrigoId": 2,
+          "distancia": 2.5,
+          "bloqueiaNoNivel": 4
+        }
+      ]
+    }
+  ],
   "familias": [
-    { "id": 1, "regiao": "Zona A", "moradores": 3, "idosos": 1, "pcd": 1, "mobilidadeReduzida": true, "possuiTransporte": false, "necessitaTransporteAdaptado": true, "abrigoId": null },
-    { "id": 2, "regiao": "Zona B", "moradores": 4, "idosos": 0, "pcd": 0, "mobilidadeReduzida": false, "possuiTransporte": true, "necessitaTransporteAdaptado": false, "abrigoId": null }
+    {
+      "id": 1,
+      "nome": "Oliveira",
+      "regiao": "A",
+      "x": 90,
+      "y": 115,
+      "moradores": 2,
+      "idosos": 1,
+      "pcd": 0,
+      "mobilidadeReduzida": true,
+      "possuiTransporte": false,
+      "necessitaTransporteAdaptado": false,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 2,
+      "nome": "Santos",
+      "regiao": "A",
+      "x": 205,
+      "y": 115,
+      "moradores": 4,
+      "idosos": 0,
+      "pcd": 1,
+      "mobilidadeReduzida": true,
+      "possuiTransporte": false,
+      "necessitaTransporteAdaptado": true,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 3,
+      "nome": "Lima",
+      "regiao": "A",
+      "x": 320,
+      "y": 115,
+      "moradores": 3,
+      "idosos": 0,
+      "pcd": 0,
+      "mobilidadeReduzida": false,
+      "possuiTransporte": true,
+      "necessitaTransporteAdaptado": false,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 4,
+      "nome": "Costa",
+      "regiao": "A",
+      "x": 90,
+      "y": 205,
+      "moradores": 5,
+      "idosos": 0,
+      "pcd": 0,
+      "mobilidadeReduzida": false,
+      "possuiTransporte": false,
+      "necessitaTransporteAdaptado": false,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 5,
+      "nome": "Almeida",
+      "regiao": "B",
+      "x": 550,
+      "y": 115,
+      "moradores": 3,
+      "idosos": 1,
+      "pcd": 0,
+      "mobilidadeReduzida": false,
+      "possuiTransporte": true,
+      "necessitaTransporteAdaptado": false,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 6,
+      "nome": "Souza",
+      "regiao": "B",
+      "x": 665,
+      "y": 115,
+      "moradores": 2,
+      "idosos": 0,
+      "pcd": 1,
+      "mobilidadeReduzida": true,
+      "possuiTransporte": false,
+      "necessitaTransporteAdaptado": true,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 7,
+      "nome": "Pereira",
+      "regiao": "B",
+      "x": 780,
+      "y": 115,
+      "moradores": 4,
+      "idosos": 0,
+      "pcd": 0,
+      "mobilidadeReduzida": false,
+      "possuiTransporte": false,
+      "necessitaTransporteAdaptado": false,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 8,
+      "nome": "Rocha",
+      "regiao": "B",
+      "x": 550,
+      "y": 205,
+      "moradores": 6,
+      "idosos": 0,
+      "pcd": 0,
+      "mobilidadeReduzida": false,
+      "possuiTransporte": false,
+      "necessitaTransporteAdaptado": false,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 9,
+      "nome": "Ferreira",
+      "regiao": "C",
+      "x": 90,
+      "y": 405,
+      "moradores": 1,
+      "idosos": 1,
+      "pcd": 0,
+      "mobilidadeReduzida": true,
+      "possuiTransporte": false,
+      "necessitaTransporteAdaptado": false,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 10,
+      "nome": "Martins",
+      "regiao": "C",
+      "x": 205,
+      "y": 405,
+      "moradores": 3,
+      "idosos": 0,
+      "pcd": 1,
+      "mobilidadeReduzida": true,
+      "possuiTransporte": false,
+      "necessitaTransporteAdaptado": true,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 11,
+      "nome": "Ribeiro",
+      "regiao": "C",
+      "x": 320,
+      "y": 405,
+      "moradores": 4,
+      "idosos": 0,
+      "pcd": 0,
+      "mobilidadeReduzida": false,
+      "possuiTransporte": true,
+      "necessitaTransporteAdaptado": false,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 12,
+      "nome": "Barbosa",
+      "regiao": "C",
+      "x": 90,
+      "y": 495,
+      "moradores": 5,
+      "idosos": 0,
+      "pcd": 0,
+      "mobilidadeReduzida": false,
+      "possuiTransporte": false,
+      "necessitaTransporteAdaptado": false,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 13,
+      "nome": "Carvalho",
+      "regiao": "D",
+      "x": 550,
+      "y": 405,
+      "moradores": 2,
+      "idosos": 1,
+      "pcd": 1,
+      "mobilidadeReduzida": true,
+      "possuiTransporte": true,
+      "necessitaTransporteAdaptado": true,
+      "transporteProprioAdaptado": true
+    },
+    {
+      "id": 14,
+      "nome": "Araújo",
+      "regiao": "D",
+      "x": 665,
+      "y": 405,
+      "moradores": 3,
+      "idosos": 0,
+      "pcd": 0,
+      "mobilidadeReduzida": false,
+      "possuiTransporte": false,
+      "necessitaTransporteAdaptado": false,
+      "transporteProprioAdaptado": false
+    },
+    {
+      "id": 15,
+      "nome": "Mendes",
+      "regiao": "D",
+      "x": 780,
+      "y": 405,
+      "moradores": 4,
+      "idosos": 0,
+      "pcd": 0,
+      "mobilidadeReduzida": false,
+      "possuiTransporte": true,
+      "necessitaTransporteAdaptado": false,
+      "transporteProprioAdaptado": false
+    }
   ],
   "abrigos": [
-    { "id": 1, "nome": "Abrigo Central", "capacidade": 30, "vagasDisponiveis": 30, "acessivel": true, "distancia": 2.5, "ativo": true },
-    { "id": 2, "nome": "Escola Municipal", "capacidade": 20, "vagasDisponiveis": 20, "acessivel": false, "distancia": 4, "ativo": true }
+    {
+      "id": 1,
+      "nome": "Escola do Rio",
+      "sigla": "A1",
+      "regiao": "A",
+      "x": 340,
+      "y": 200,
+      "capacidade": 12,
+      "vagasDisponiveis": 10,
+      "acessivel": true,
+      "ativo": true,
+      "alagaNoNivel": 2
+    },
+    {
+      "id": 2,
+      "nome": "Ginásio Central",
+      "sigla": "A2",
+      "regiao": "B",
+      "x": 800,
+      "y": 200,
+      "capacidade": 18,
+      "vagasDisponiveis": 16,
+      "acessivel": false,
+      "ativo": true,
+      "alagaNoNivel": 4
+    },
+    {
+      "id": 3,
+      "nome": "Centro da Colina",
+      "sigla": "A3",
+      "regiao": "D",
+      "x": 800,
+      "y": 495,
+      "capacidade": 14,
+      "vagasDisponiveis": 12,
+      "acessivel": true,
+      "ativo": true,
+      "alagaNoNivel": 4
+    }
   ],
   "veiculos": [
-    { "id": 1, "tipo": "adaptado", "capacidade": 4, "disponivel": true, "regiao": "Zona A" },
-    { "id": 2, "tipo": "convencional", "capacidade": 5, "disponivel": true, "regiao": "Zona B" }
+    {
+      "id": 1,
+      "nome": "Van adaptada do Rio",
+      "tipo": "adaptado",
+      "capacidade": 4,
+      "disponivel": true,
+      "regiao": "A",
+      "x": 205,
+      "y": 205
+    },
+    {
+      "id": 2,
+      "nome": "Van do Centro",
+      "tipo": "convencional",
+      "capacidade": 6,
+      "disponivel": true,
+      "regiao": "B",
+      "x": 665,
+      "y": 205
+    },
+    {
+      "id": 3,
+      "nome": "Van adaptada do Centro",
+      "tipo": "adaptado",
+      "capacidade": 3,
+      "disponivel": true,
+      "regiao": "B",
+      "x": 730,
+      "y": 205
+    },
+    {
+      "id": 4,
+      "nome": "Van das Pontes",
+      "tipo": "convencional",
+      "capacidade": 5,
+      "disponivel": true,
+      "regiao": "C",
+      "x": 205,
+      "y": 495
+    },
+    {
+      "id": 5,
+      "nome": "Van da Colina",
+      "tipo": "convencional",
+      "capacidade": 5,
+      "disponivel": false,
+      "regiao": "D",
+      "x": 665,
+      "y": 495
+    }
   ]
 }
