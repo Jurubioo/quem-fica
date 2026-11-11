@@ -30,7 +30,7 @@ export default function FamilyDetails({ family, region, situation, shelters, veh
       <dl>
         <dt>Transporte próprio</dt>
         <dd>{family.possuiTransporte ? (family.transporteProprioAdaptado ? 'Sim, adaptado' : 'Sim, convencional') : 'Não possui'}</dd>
-        {shelter && <><dt>Abrigo de destino</dt><dd>{shelter.nome} · {situation.distancia} km</dd></>}
+        {shelter && <><dt>Abrigo de destino</dt><dd>{shelter.nome} · {situation.distancia.toLocaleString('pt-BR')} km</dd></>}
         {situation.transporte && <><dt>Deslocamento previsto</dt><dd>{vehicle ? vehicle.nome : situation.transporte === 'proprio' ? 'Transporte próprio' : 'A pé, por rota liberada'}</dd></>}
       </dl>
       <strong>Necessidades de apoio</strong>

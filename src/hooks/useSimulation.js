@@ -1,7 +1,29 @@
-// Responsável: integrante 03.
-// Gerencia o estado da simulação (famílias, abrigos, veículos, resultados)
-// e disponibiliza para as páginas Simulação e Impacto.
+import { useState } from 'react';
+import useScenario from './useScenario';
+import { runSimulation } from '../utils/simulationEngine';
+
 export default function useSimulation() {
-  // TODO: carregar o cenário com getScenario() e executar o motor de simulação
-  return {};
+  const { scenario, error, reload } = useScenario();
+  const [level, setLevel] = useState(1);
+  const [simulation, setSimulation] = useState(null);
+  const [simulationError, setSimulationError] = useState('');
+
+  function changeLevel(value) {
+    setLevel(value);
+    setSimulation(null);
+    setSimulationError('');
+  }
+
+  function execute() {
+    if (!scenario) return;
+    try {
+      setSimulation(runSimulation(scenario, level));
+      setSimulationError('');
+    } catch (cause) {
+      setSimulation(null);
+      setSimulationError(cause.message || 'Não foi possível executar a simulação.');
+    }
+  }
+
+  return { scenario, error, reload, level, changeLevel, simulation, simulationError, execute };
 }

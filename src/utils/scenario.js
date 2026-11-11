@@ -9,8 +9,8 @@ export function getRegionState(region, level) {
 
 export function getFamilyNeeds(family) {
   const needs = [];
-  if (family.idosos > 0) needs.push(`${family.idosos} pessoa(s) idosa(s)`);
-  if (family.pcd > 0) needs.push(`${family.pcd} pessoa(s) com deficiência`);
+  if (family.idosos > 0) needs.push(`${family.idosos} ${family.idosos === 1 ? 'pessoa idosa' : 'pessoas idosas'}`);
+  if (family.pcd > 0) needs.push(`${family.pcd} ${family.pcd === 1 ? 'pessoa' : 'pessoas'} com deficiência`);
   if (family.mobilidadeReduzida) needs.push('Mobilidade reduzida');
   if (family.necessitaTransporteAdaptado) needs.push('Precisa de transporte adaptado');
   if (!family.possuiTransporte) needs.push('Sem transporte próprio');

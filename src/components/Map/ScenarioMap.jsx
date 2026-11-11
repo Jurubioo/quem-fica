@@ -1,5 +1,6 @@
 import styled, { useTheme } from 'styled-components';
 import { getFamilySituation, getRegionState, STATUS_SYMBOLS } from '../../utils/scenario';
+import { isShelterAvailable } from '../../utils/evacuationRules';
 
 const Figure = styled.figure`
   margin: 0;
@@ -40,6 +41,9 @@ const Marker = styled.button`
 
 export default function ScenarioMap({ scenario, level, families, selectedId, onSelect, results = [] }) {
   const { colors } = useTheme();
+  const selected = families.find((family) => family.id === selectedId);
+  const selectedResult = results.find((result) => result.familiaId === selectedId);
+  const destination = scenario.abrigos.find((shelter) => shelter.id === selectedResult?.abrigoId);
   return (
     <Figure>
       <Scroll tabIndex={0} role="group" aria-label="Mapa do bairro. Em telas pequenas, use as setas ou role na horizontal.">
@@ -64,8 +68,10 @@ export default function ScenarioMap({ scenario, level, families, selectedId, onS
             <path d="M20 280 H880" stroke={colors.border} strokeWidth="18" />
             <path d="M20 280 H880" stroke={colors.surface} strokeWidth="2" strokeDasharray="12 8" />
             <text x="35" y="285" fontSize="14" fill={colors.ink}>Via principal · desenho esquemático</text>
+            {selected && destination && <path d={`M${selected.x} ${selected.y} L${destination.x} ${destination.y}`}
+              fill="none" stroke={colors.safe} strokeWidth="3" strokeDasharray="8 6" />}
             {scenario.abrigos.map((shelter) => {
-              const open = shelter.ativo && level < shelter.alagaNoNivel;
+              const open = isShelterAvailable(shelter, level, scenario.regioes);
               return <g key={shelter.id} transform={`translate(${shelter.x} ${shelter.y})`}>
                 <title>{shelter.nome}: {open ? 'ativo' : 'indisponível'}</title>
                 <path d="M-25 -14 L0 -32 L25 -14 V20 H-25 Z" fill={colors.surface} stroke={open ? colors.safe : colors.risk} strokeWidth="3" />
@@ -90,7 +96,7 @@ export default function ScenarioMap({ scenario, level, families, selectedId, onS
           })}
         </Stage>
       </Scroll>
-      <figcaption>Selecione uma família pelo número. A1–A3: abrigos · V1–V5: veículos. Mapa fictício, sem escala geográfica. Em telas pequenas, role o mapa na horizontal.</figcaption>
+      <figcaption>Selecione uma família pelo número. A1–A3: abrigos · V1–V5: veículos. A linha tracejada indica o destino previsto, sem representar o trajeto real. Mapa fictício, sem escala geográfica. Em telas pequenas, role o mapa na horizontal.</figcaption>
     </Figure>
   );
 }
