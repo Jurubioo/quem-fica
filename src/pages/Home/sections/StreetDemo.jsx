@@ -130,6 +130,7 @@ const RoundButton = styled.button`
 
 const Range = styled.input`
   flex: 1;
+  min-width: 0;
   appearance: none;
   height: 0.9rem;
   border-radius: 999px;

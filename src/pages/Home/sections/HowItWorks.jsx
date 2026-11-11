@@ -89,6 +89,8 @@ const Audience = styled.div`
 `;
 
 const AudienceCard = styled.div`
+  min-width: 0;
+  overflow-wrap: anywhere;
   padding: 1.75rem;
   border-radius: ${({ theme }) => theme.radius.lg};
   background: ${({ $dark, theme }) => ($dark ? theme.colors.night : theme.colors.surfaceAlt)};

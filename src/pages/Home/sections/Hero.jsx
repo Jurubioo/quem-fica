@@ -160,7 +160,7 @@ export default function Hero() {
   return (
     <Wrap aria-labelledby="hero-titulo">
       <div className="container">
-        <div className="row align-items-center g-5">
+        <div className="row align-items-center gy-5 gx-4">
           <div className="col-12 col-lg-7">
             <Eyebrow $light>
               <IconWave size={20} />

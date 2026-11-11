@@ -26,6 +26,8 @@ const List = styled.ul`
 `;
 
 const Card = styled.li`
+  min-width: 0;
+  overflow-wrap: anywhere;
   display: flex;
   gap: 1.1rem;
   align-items: flex-start;
@@ -57,6 +59,10 @@ const Card = styled.li`
     margin: 0;
     font-size: 1rem;
     color: ${({ theme }) => theme.colors.inkSoft};
+  }
+
+  @media (max-width: 575px) {
+    flex-direction: column;
   }
 `;
 

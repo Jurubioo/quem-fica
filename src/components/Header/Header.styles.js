@@ -83,7 +83,8 @@ export const A11yButton = styled.button`
     cursor: not-allowed;
   }
 
-  &[aria-pressed='true'] {
+  &[aria-pressed='true'],
+  &[aria-pressed='true']:hover {
     background: ${({ theme }) => theme.colors.waterLight};
     border-color: ${({ theme }) => theme.colors.waterLight};
     color: #14202B;

@@ -82,7 +82,7 @@ export default function ProblemSection() {
   return (
     <Section aria-labelledby="problema-titulo">
       <div className="container">
-        <div className="row g-5 align-items-center">
+        <div className="row gy-5 gx-4 align-items-center">
           <div className="col-12 col-lg-6">
             <Eyebrow>O problema</Eyebrow>
             <Title id="problema-titulo">O alerta chega para todos. A ajuda, não.</Title>
