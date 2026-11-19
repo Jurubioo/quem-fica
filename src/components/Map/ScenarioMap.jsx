@@ -205,7 +205,7 @@ export default function ScenarioMap({ scenario, level, familyItems, selectedId, 
               $y={family.y}
               $status={situation.status}
               $selected={selectedId === family.id}
-              aria-label={`Família ${family.id}, ${family.nome}. ${situation.label}`}
+              aria-label={`Família ${String(family.id).padStart(2, '0')}, ${family.nome}. ${situation.label}`}
               aria-pressed={selectedId === family.id}
               aria-controls="detalhes-familia"
               onClick={() => onSelect(family.id)}

@@ -59,8 +59,8 @@ export const A11yButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: 0.45rem;
-  min-width: 2.6rem;
-  min-height: 2.4rem;
+  min-width: 2.75rem; /* área de toque de pelo menos 44px */
+  min-height: 2.75rem;
   padding: 0 ${({ $wide }) => ($wide ? '0.9rem' : '0.5rem')};
   border: 1.5px solid rgba(255, 255, 255, 0.45);
   border-radius: ${({ theme }) => theme.radius.pill};
