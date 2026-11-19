@@ -145,7 +145,7 @@ export default function HowItWorks() {
     <Section id="como-funciona" aria-labelledby="como-titulo">
       <div className="container">
         <Eyebrow>Como funciona</Eyebrow>
-        <Title id="como-titulo">Do alerta ao plano, em três passos.</Title>
+        <Title id="como-titulo" tabIndex={-1}>Do alerta ao plano, em três passos.</Title>
 
         <Steps>
           {STEPS.map(({ icon: Icon, title, text }) => (

@@ -1,4 +1,4 @@
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { AccessibilityProvider, useAccessibility } from './context/AccessibilityContext';
 import { contrastTheme, lightTheme } from './styles/theme';
@@ -18,10 +18,11 @@ function ThemedApp() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    // HashRouter: as rotas ficam depois do # e o site abre direto pelo index.html.
+    <HashRouter>
       <AccessibilityProvider>
         <ThemedApp />
       </AccessibilityProvider>
-    </BrowserRouter>
+    </HashRouter>
   );
 }

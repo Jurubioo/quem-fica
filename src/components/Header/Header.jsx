@@ -58,7 +58,16 @@ export default function Header() {
 
   return (
     <>
-      <SkipLink href="#conteudo">Pular para o conteúdo</SkipLink>
+      <SkipLink
+        href="#conteudo"
+        onClick={(event) => {
+          // Com rotas por hash, mudar o # trocaria de página: o foco é levado pelo DOM.
+          event.preventDefault();
+          document.getElementById('conteudo')?.focus();
+        }}
+      >
+        Pular para o conteúdo
+      </SkipLink>
 
       <A11yBar aria-label="Opções de acessibilidade">
         <div className="container">
