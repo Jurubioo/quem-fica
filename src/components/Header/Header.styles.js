@@ -73,9 +73,12 @@ export const A11yButton = styled.button`
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease;
 
-  &:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.14);
-    border-color: ${({ theme }) => theme.colors.onDark};
+  /* Só em aparelhos com mouse: no toque, o hover ficava preso e o botão parecia ativo. */
+  @media (hover: hover) {
+    &:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: ${({ theme }) => theme.colors.onDark};
+    }
   }
 
   &:disabled {
