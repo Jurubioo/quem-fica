@@ -173,6 +173,16 @@ const RoundButton = styled.button`
   }
 `;
 
+// Fundo da seção (antes era estilo inline).
+const DemoSection = styled(Section)`
+  background: ${({ theme }) => theme.gradients.sky};
+`;
+
+// Grupo da água: a posição vem do nível escolhido (a transição fica no CSS de .water).
+const WaterGroup = styled.g`
+  transform: translateY(${({ $y }) => $y}px);
+`;
+
 const Range = styled.input`
   flex: 1;
   min-width: 0;
@@ -181,8 +191,8 @@ const Range = styled.input`
   border-radius: 999px;
   background: linear-gradient(
     to right,
-    ${({ theme }) => theme.colors.water} 0 var(--fill),
-    ${({ theme }) => theme.colors.line} var(--fill) 100%
+    ${({ theme }) => theme.colors.water} 0 ${({ $fill }) => $fill},
+    ${({ theme }) => theme.colors.line} ${({ $fill }) => $fill} 100%
   );
   cursor: pointer;
 
@@ -275,7 +285,7 @@ const FamilyCard = styled.li`
     height: 2rem;
     border-radius: 50%;
     background: ${({ theme }) => theme.colors.deep};
-    color: #fff;
+    color: ${({ theme }) => theme.colors.onDark};
     font-size: 1rem;
   }
 
@@ -321,7 +331,7 @@ function House({ family, colors }) {
       <rect x="-34" y="-50" width="68" height="50" rx="3" fill={colors.surface} stroke={colors.ink} strokeWidth="2.5" />
       <path d="M-42 -50 L0 -84 L42 -50 Z" fill={colors.deep} stroke={colors.ink} strokeWidth="2.5" strokeLinejoin="round" />
       <rect x="-9" y="-28" width="18" height="28" fill={colors.sun} stroke={colors.ink} strokeWidth="2" />
-      <text x="0" y="-60" textAnchor="middle" fontSize="16" fontWeight="700" fill="#fff" fontFamily="Lexend, sans-serif">
+      <text x="0" y="-60" textAnchor="middle" fontSize="16" fontWeight="700" fill={colors.onDark} fontFamily="Poppins, sans-serif">
         {id}
       </text>
     </g>
@@ -375,7 +385,7 @@ export default function StreetDemo() {
   }
 
   return (
-    <Section aria-labelledby="demo-titulo" style={{ background: theme.gradients.sky }}>
+    <DemoSection aria-labelledby="demo-titulo">
       <div className="container">
         <Eyebrow>Experimente</Eyebrow>
         <Title id="demo-titulo">Uma rua, cinco famílias.</Title>
@@ -401,7 +411,7 @@ export default function StreetDemo() {
               <rect x="-36" y="-56" width="72" height="56" rx="4" fill={colors.safeBg} stroke={colors.safe} strokeWidth="3" />
               <path d="M-44 -56 L0 -88 L44 -56 Z" fill={colors.safe} />
               <path d="M0 -44 V-16 M-14 -30 H14" stroke={colors.safe} strokeWidth="6" strokeLinecap="round" />
-              <text x="0" y="22" textAnchor="middle" fontSize="17" fontWeight="700" fill={colors.ink} fontFamily="Lexend, sans-serif">
+              <text x="0" y="22" textAnchor="middle" fontSize="17" fontWeight="700" fill={colors.ink} fontFamily="Poppins, sans-serif">
                 Abrigo
               </text>
             </g>
@@ -411,7 +421,7 @@ export default function StreetDemo() {
             ))}
 
             {/* água: o grupo inteiro desce/sobe conforme o nível */}
-            <g className="water" style={{ transform: `translateY(${LEVELS[level].waterY}px)` }}>
+            <WaterGroup className="water" $y={LEVELS[level].waterY}>
               <path
                 className="wave"
                 d={WAVE}
@@ -420,7 +430,7 @@ export default function StreetDemo() {
                 stroke={scene.waterStroke}
                 strokeWidth="3"
               />
-            </g>
+            </WaterGroup>
 
             {/* terreno: mais baixo à esquerda, mais alto à direita.
                 Desenhado depois da água para "esconder" a água abaixo do chão. */}
@@ -460,7 +470,7 @@ export default function StreetDemo() {
                     value={level}
                     onChange={handleLevelChange}
                     aria-valuetext={LEVELS[level].label}
-                    style={{ '--fill': fill }}
+                    $fill={fill}
                   />
                   <RoundButton
                     type="button"
@@ -531,6 +541,6 @@ export default function StreetDemo() {
           </Link>
         </Closing>
       </div>
-    </Section>
+    </DemoSection>
   );
 }

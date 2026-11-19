@@ -55,7 +55,7 @@ const GlobalStyles = createGlobalStyle`
 
   ::selection {
     background: ${({ theme }) => theme.colors.waterLight};
-    color: #14202B;
+    color: ${({ theme }) => theme.colors.night};
   }
 
   img, svg { max-width: 100%; }

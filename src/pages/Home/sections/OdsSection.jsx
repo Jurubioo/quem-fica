@@ -15,7 +15,7 @@ const ODS = [
     name: 'Cidades e comunidades sustentáveis',
     text: 'Apoia cidades mais seguras e preparadas para desastres.',
     color: '#FD9D24',
-    ink: '#14202B',
+    ink: '#0B1F3A', // Navy Profundo da marca (cores das ODS são as oficiais da ONU)
   },
   {
     num: 13,

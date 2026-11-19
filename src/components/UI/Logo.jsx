@@ -1,49 +1,66 @@
 import { useId } from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 
 const Wrap = styled.span`
   display: inline-flex;
   align-items: center;
-  gap: 0.7rem;
+  gap: 0.6rem;
 `;
 
 const Word = styled.span`
   font-family: ${({ theme }) => theme.fonts.heading};
   font-weight: 700;
-  font-size: 1.45rem;
-  letter-spacing: -0.03em;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  white-space: nowrap;
   color: ${({ $light, theme }) => ($light ? theme.colors.onDark : theme.colors.ink)};
 
   b {
-    color: ${({ $light, theme }) => ($light ? theme.colors.waterLight : theme.colors.water)};
     font-weight: 700;
+    color: ${({ $light, theme }) => ($light ? theme.brand.aqua : theme.brand.azulMare)};
   }
 `;
 
-// Marca: casa sobre a água. `light` = versão para fundo escuro.
-export default function Logo({ light = false }) {
-  const gradientId = useId(); // id único: o logo aparece no topo e no rodapé
+// Símbolo: um "Q" de quem, com a casa, a janela âmbar (quem ainda fica)
+// e a onda aqua. `light` = versão para fundo escuro.
+export function Symbol({ size = 44, light = false }) {
+  const theme = useTheme();
+  const uid = useId().replace(/:/g, '');
+  const clipId = `marca-clip-${uid}`;
+  const estrutura = light ? theme.brand.nevoa : theme.brand.navy;
 
   return (
+    <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id={clipId}>
+          <circle cx="29" cy="29" r="18.5" />
+        </clipPath>
+      </defs>
+      {/* anel e cauda: o "Q" de quem */}
+      <circle cx="29" cy="29" r="21" fill="none" stroke={estrutura} strokeWidth="5.5" />
+      <line x1="44.5" y1="44.5" x2="55" y2="55" stroke={estrutura} strokeWidth="6" strokeLinecap="round" />
+      {/* água, recortada pelo anel */}
+      <path
+        d="M4 40 C12 36 20 44 29 40 S46 36 56 40 V60 H4 Z"
+        fill={theme.brand.aqua}
+        clipPath={`url(#${clipId})`}
+      />
+      {/* casa */}
+      <path d="M18 32 L29 22 L40 32 V42 H18 Z" fill={estrutura} />
+      {/* janela acesa */}
+      <rect x="26" y="31" width="6" height="6" rx="1" fill={theme.brand.ambar} />
+    </svg>
+  );
+}
+
+// Logotipo: símbolo + "quem fica?" em minúsculas (Poppins Bold).
+export default function Logo({ light = false, size = 44 }) {
+  return (
     <Wrap>
-      <svg width="44" height="44" viewBox="0 0 64 64" aria-hidden="true" focusable="false">
-        <defs>
-          <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0" stopColor="#1B1A45" />
-            <stop offset=".55" stopColor="#2A3378" />
-            <stop offset="1" stopColor="#0E6F86" />
-          </linearGradient>
-        </defs>
-        <rect width="64" height="64" rx="16" fill={`url(#${gradientId})`} />
-        <path d="M16 33 32 19l16 14v13H16z" fill="#FBF7F0" />
-        <path d="M27 46v-8h10v8" fill="#FFB547" />
-        <path
-          d="M8 50c4 0 4-3 8-3s4 3 8 3 4-3 8-3 4 3 8 3 4-3 8-3 4 3 8 3v6H8z"
-          fill="#7FD3E0"
-        />
-      </svg>
+      <Symbol size={size} light={light} />
       <Word $light={light}>
-        Quem Fica<b>?</b>
+        quem fica<b>?</b>
       </Word>
     </Wrap>
   );

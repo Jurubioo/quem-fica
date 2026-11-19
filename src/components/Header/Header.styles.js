@@ -75,7 +75,7 @@ export const A11yButton = styled.button`
 
   &:hover:not(:disabled) {
     background: rgba(255, 255, 255, 0.14);
-    border-color: #fff;
+    border-color: ${({ theme }) => theme.colors.onDark};
   }
 
   &:disabled {
@@ -87,7 +87,7 @@ export const A11yButton = styled.button`
   &[aria-pressed='true']:hover {
     background: ${({ theme }) => theme.colors.waterLight};
     border-color: ${({ theme }) => theme.colors.waterLight};
-    color: #14202B;
+    color: ${({ theme }) => theme.colors.night};
   }
 `;
 

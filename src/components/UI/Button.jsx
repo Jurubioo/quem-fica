@@ -26,7 +26,7 @@ const variants = {
 
     &:hover {
       background: rgba(255, 255, 255, 0.12);
-      border-color: #fff;
+      border-color: ${({ theme }) => theme.colors.onDark};
       color: ${({ theme }) => theme.colors.onDark};
     }
   `,
