@@ -88,56 +88,59 @@ export const lightTheme = {
 };
 
 // Tema de alto contraste: fundo escuro derivado do Navy, com Aqua e Âmbar.
+// Alto contraste: só as cores do manual de marca.
+// Fundo Navy Profundo, texto Névoa/branco, destaques Aqua e Âmbar.
+// Verde e vermelho continuam apenas para indicar situação.
 export const contrastTheme = {
   ...base,
   name: 'alto-contraste',
   colors: {
-    paper: '#0A1A2E',
-    surface: '#112540',
-    surfaceAlt: '#183252',
-    ink: '#EEF6FA',
-    inkSoft: '#C5D6E2',
-    line: '#2C4A6B',
-    border: '#2C4A6B',
-    headerBg: 'rgba(10, 26, 46, 0.96)',
+    paper: '#0B1F3A', // Navy Profundo
+    surface: '#0B1F3A',
+    surfaceAlt: '#0B1F3A',
+    ink: '#FFFFFF',
+    inkSoft: '#F4F8FB', // Névoa
+    line: '#F4F8FB',
+    border: '#F4F8FB',
+    headerBg: '#0B1F3A',
 
-    night: '#06121F',
-    deep: '#15456B',
-    water: '#22D3EE',
+    night: '#0B1F3A',
+    deep: '#0B1F3A',
+    water: '#22D3EE', // Aqua
     waterLight: '#22D3EE',
-    sun: '#FBBF24',
+    sun: '#FBBF24', // Âmbar
     amber: '#FBBF24',
 
     primary: '#22D3EE',
-    primaryHover: '#7BE4F5',
+    primaryHover: '#F4F8FB',
     onPrimary: '#0B1F3A',
 
     onDark: '#FFFFFF',
-    onDarkSoft: '#E1E8EF',
+    onDarkSoft: '#F4F8FB',
 
     safe: '#86D9A8',
-    safeBg: '#183A2A',
+    safeBg: '#0B1F3A',
     risk: '#F5A79D',
-    riskBg: '#3B2726',
-    neutral: '#C5D6E2',
-    neutralBg: '#183252',
+    riskBg: '#0B1F3A',
+    neutral: '#F4F8FB',
+    neutralBg: '#0B1F3A',
   },
   scene: {
-    skyTop: '#16324D',
-    skyBottom: '#0A1A2E',
-    ground: '#1E3850',
-    groundStroke: '#3D5A76',
+    skyTop: '#0B1F3A',
+    skyBottom: '#0B1F3A',
+    ground: '#0B1F3A',
+    groundStroke: '#F4F8FB',
     water: '#22D3EE',
     waterOpacity: 0.35,
-    waterStroke: '#7BE4F5',
+    waterStroke: '#22D3EE',
   },
   gradients: {
-    hero: 'linear-gradient(165deg, #06121F 0%, #0F2F4D 55%, #0E4F62 100%)',
-    soft: 'linear-gradient(180deg, #112540 0%, #0A1A2E 100%)',
-    sky: 'linear-gradient(180deg, #112540 0%, #0A1A2E 100%)',
+    hero: '#0B1F3A',
+    soft: '#0B1F3A',
+    sky: '#0B1F3A',
   },
   shadow: {
     soft: 'none',
-    lift: '0 8px 24px -10px rgba(0, 0, 0, 0.6)',
+    lift: 'none',
   },
 };

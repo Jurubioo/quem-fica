@@ -42,11 +42,6 @@ const Heading = styled.h1`
   em {
     font-style: normal;
     color: ${({ theme }) => theme.colors.waterLight};
-    /* sublinhado ondulado = água */
-    text-decoration: underline wavy;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 0.18em;
-    text-decoration-skip-ink: none;
   }
 `;
 
