@@ -27,6 +27,7 @@ const base = {
     aqua: '#22D3EE',
     ambar: '#FBBF24',
     nevoa: '#F4F8FB',
+    aquaClaro: '#AAEBF6', // faixa clara da onda na capa do manual
   },
 };
 
