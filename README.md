@@ -8,7 +8,19 @@ conseguem chegar sozinhas a um lugar seguro.
 
 Global Solution FIAP 2026/2 · CitizenTech · ODS 10, 11 e 13.
 
-## Como rodar
+## Vídeo pitch
+
+[PREENCHER: link público do vídeo no YouTube, Google Drive ou Vimeo. Testar numa aba anônima.]
+
+## Como abrir
+
+**Não é preciso instalar nada.** Na pasta entregue, abra o arquivo `index.html` com dois cliques. O site abre
+direto no navegador (Chrome, Edge ou Firefox). As fontes vêm da internet; sem conexão, o site usa uma fonte
+padrão do sistema.
+
+O código-fonte em React está na pasta `codigo-fonte`.
+
+## Como rodar o código-fonte
 
 ```bash
 npm install
@@ -25,10 +37,10 @@ React · Vite · React Router DOM · Bootstrap (grid) · Styled Components · Re
 
 | Rota         | Página    | Responsável      |
 | ------------ | --------- | ---------------- |
-| `/`          | Início    | Integrante 01    |
-| `/simulacao` | Simulação | Integrantes 02 e 03 |
-| `/impacto`   | Impacto   | Integrante 04    |
-| `/equipe`    | Equipe    | Integrante 05    |
+| `/`          | Início    | Julia Rubio Fernandes |
+| `/simulacao` | Simulação | Arthur Mairink   |
+| `/impacto`   | Impacto   | Rodrigo Sobral Moreira |
+| `/equipe`    | Equipe (com o formulário de participação) | Gabriela Donato |
 
 Qualquer outro endereço mostra a página 404.
 
@@ -36,7 +48,7 @@ Qualquer outro endereço mostra a página 404.
 
 ```
 public/
-  data/cenario.json        dados fictícios (carregados com fetch)
+  img/                     fotos da equipe
 src/
   components/
     Header/  Footer/  Layout/   layout comum a todas as páginas
@@ -44,10 +56,12 @@ src/
     Icons/                      ícones SVG (sem biblioteca)
     Map/ Dashboard/ Family/ Shelter/ Vehicle/   (para os colegas)
   context/AccessibilityContext.jsx   tamanho do texto + alto contraste
+  data/cenario.json        dados fictícios (15 famílias, abrigos e veículos)
+  data/equipe.js           integrantes, RM, responsabilidades e tecnologias
   hooks/      usePageTitle, useSimulation
   pages/      Home/ Simulation/ Impact/ Team/ NotFound/
   routes/     AppRoutes.jsx (rotas) e navigation.js (itens do menu)
-  services/   scenarioService.js (fetch do cenário)
+  services/   scenarioService.js (carrega o cenário de src/data/cenario.json)
   styles/     theme.js (cores e fontes) e GlobalStyles.js
   utils/      simulationEngine, evacuationRules, calculations
 ```
@@ -68,7 +82,7 @@ src/
 
 - Link "Pular para o conteúdo" (aparece ao apertar Tab).
 - Barra com **A− / A / A+** (até 137,5%) e **alto contraste**, salvos no navegador.
-- Fontes Lexend e Atkinson Hyperlegible, feitas para facilitar a leitura. Texto base de 18px.
+- Fontes Poppins (títulos) e Inter (textos), da identidade visual do projeto. Texto base de 18px.
 - Menu com `aria-current`, botão "Menu" com texto, `aria-expanded` e fechamento com Esc.
 - Foco visível em qualquer fundo; ao trocar de página o foco vai para o conteúdo.
 - Animações desligadas para quem ativa "reduzir movimento" no sistema.
@@ -89,8 +103,28 @@ substituem as orientações da Defesa Civil.
 O arquivo `vercel.json` já redireciona todas as rotas para o `index.html`, então recarregar
 `/simulacao` ou `/equipe` funciona depois de publicado.
 
+## Formulário de participação
+
+Fica na página da equipe. Usa React Hook Form, com validação dos campos obrigatórios (nome, e-mail, forma
+de participação e consentimento). Os erros e a mensagem de sucesso aparecem na própria página, sem
+`alert()`. O projeto não tem servidor: as respostas ficam guardadas só no navegador de quem preenche
+(`localStorage`), e a pessoa pode apagá-las na mesma página.
+
 ## Integrantes
 
-| Nome | RM |
-| ---- | -- |
-|      |    |
+| Nome                   | RM     | Responsabilidade principal                                                         |
+| ---------------------- | ------ | ---------------------------------------------------------------------------------- |
+| Julia Rubio Fernandes  | 569418 | Estrutura do projeto, rotas, layout e página inicial.                             |
+| Arthur Mairink         | 569745 | Mapa interativo, visualização das famílias, motor de simulação e regras de evacuação. |
+| Rodrigo Sobral Moreira | 561620 | Cadastro de recursos, formulários e dashboard de impacto.                         |
+| Gabriela Donato        | 571773 | Página da equipe, acessibilidade, testes, README e pitch.                         |
+
+## Uso de IA generativa
+
+Ferramentas usadas e para quê:
+
+- **Claude (Anthropic):** apoio na página da equipe e no formulário de participação, na identidade visual
+  (manual de marca, cores, fontes e logotipo), na revisão de acessibilidade, na troca de estilos inline por
+  componentes e na redação deste README.
+
+Revisão pela equipe: [PREENCHER: como a equipe revisou e entendeu o código e os textos gerados com IA.]

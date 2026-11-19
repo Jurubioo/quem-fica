@@ -178,7 +178,18 @@ export default function Hero() {
                 Ver a simulação
                 <IconArrowRight />
               </ButtonLink>
-              <ButtonLink as="a" href="#como-funciona" $variant="light">
+              <ButtonLink
+                as="a"
+                href="#como-funciona"
+                $variant="light"
+                onClick={(event) => {
+                  // Rola até a seção sem mudar o # (que, com rotas por hash, trocaria de página).
+                  event.preventDefault();
+                  const secao = document.getElementById('como-funciona');
+                  secao?.scrollIntoView({ behavior: 'smooth' });
+                  secao?.querySelector('h2')?.focus();
+                }}
+              >
                 Como funciona
               </ButtonLink>
             </Actions>

@@ -2,36 +2,13 @@ import { validateScenario } from '../utils/scenarioValidation.js';
 
 export { validateScenario };
 
-export async function getScenario({ signal } = {}) {
-  const url = `${import.meta.env.BASE_URL}data/cenario.json`;
-  let response;
+import cenarioPadrao from '../data/cenario.json';
 
-  try {
-    response = await fetch(url, { signal });
-  } catch (error) {
-    if (error.name === 'AbortError') {
-      throw error;
-    }
-
-    throw new Error('Não foi possível carregar o cenário. Verifique a conexão e tente novamente.');
-  }
-
-  if (!response.ok) {
-    throw new Error('Não foi possível carregar o cenário.');
-  }
-
-  let scenario;
-
-  try {
-    scenario = await response.json();
-  } catch (error) {
-    if (error.name === 'AbortError') {
-      throw error;
-    }
-
-    throw new Error('O arquivo do cenário não contém um JSON válido.');
-  }
-
+// O cenário é importado junto com o código (sem fetch): assim o site abre direto
+// pelo index.html, sem servidor. A função continua com o mesmo nome e retorno.
+export async function getScenario() {
+  // Cópia: quem usa o cenário nunca altera o arquivo original.
+  const scenario = JSON.parse(JSON.stringify(cenarioPadrao));
   validateScenario(scenario);
   return scenario;
 }
