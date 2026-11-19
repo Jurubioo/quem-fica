@@ -68,25 +68,22 @@ export default function Header() {
               type="button"
               onClick={decreaseFont}
               disabled={!canDecrease}
-              aria-label="Diminuir o tamanho do texto"
             >
-              A−
+              A−<span className="visually-hidden"> Diminuir o tamanho do texto</span>
             </A11yButton>
             <A11yButton
               type="button"
               onClick={resetFont}
-              aria-label={`Tamanho padrão do texto. Agora em ${fontPercent}%`}
             >
-              A
+              A<span className="visually-hidden"> Tamanho padrão do texto, agora em {fontPercent}%</span>
             </A11yButton>
             <A11yButton
               type="button"
               onClick={increaseFont}
               disabled={!canIncrease}
-              aria-label="Aumentar o tamanho do texto"
               $big
             >
-              A+
+              A+<span className="visually-hidden"> Aumentar o tamanho do texto</span>
             </A11yButton>
           </A11yGroup>
 
