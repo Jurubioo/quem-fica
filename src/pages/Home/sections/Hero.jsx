@@ -3,14 +3,22 @@ import { ButtonLink } from '../../../components/UI/Button';
 import { Eyebrow } from '../../../components/UI/Section';
 import { IconAlert, IconArrowRight, IconCheck, IconWave } from '../../../components/Icons/Icons';
 
-const drift = keyframes`
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
+// Ondas do rodapé do hero. Cada camada é um fundo repetido na horizontal, com
+// um tile de exatamente um período (1440px). Como o deslocamento da animação é
+// esse mesmo período, o loop é contínuo, sem bordas nem emendas.
+const driftBack = keyframes`
+  from { background-position-x: 0; }
+  to { background-position-x: -1440px; }
 `;
+const driftFront = keyframes`
+  from { background-position-x: 0; }
+  to { background-position-x: -1440px; }
+`;
+
+const WAVE_TILE = (fill) =>
+  `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'><path d='M0 50 C240 10 480 10 720 50 C960 90 1200 90 1440 50 V100 H0 Z' fill='${fill}'/></svg>`;
+
+const waveImage = (fill) => `url("data:image/svg+xml,${encodeURIComponent(WAVE_TILE(fill))}")`;
 
 const Wrap = styled.section`
   position: relative;
@@ -131,30 +139,29 @@ const Waves = styled.div`
   height: clamp(4.5rem, 9vw, 6.5rem);
   overflow: hidden;
   pointer-events: none;
-  color: ${({ theme }) => theme.colors.paper}; /* onda da frente = cor da página */
-
-  svg {
-    position: absolute;
-    bottom: 0;
-    width: 200%;
-    height: 100%;
-    animation: ${drift} linear infinite;
-  }
-
-  svg:first-child {
-    color: ${({ theme }) => theme.colors.waterLight};
-    animation-duration: 26s;
-    opacity: 0.3;
-  }
-  svg:last-child {
-    animation-duration: 18s;
-    height: 70%;
-  }
 `;
 
-// Uma onda que se repete 2 vezes; ao deslizar 50% ela "emenda" sem salto.
-const WAVE_PATH =
-  'M0 50 C240 10 480 10 720 50 C960 90 1200 90 1440 50 C1680 10 1920 10 2160 50 C2400 90 2640 90 2880 50 V100 H0 Z';
+const Layer = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-size: 1440px 100%;
+`;
+
+// Camada de trás: faixa Aqua clara da capa do manual. Camada da frente: cor da página.
+const BackLayer = styled(Layer)`
+  background-image: ${({ theme }) => waveImage(theme.brand.aquaClaro)};
+  animation: ${driftBack} 26s linear infinite;
+`;
+
+const FrontLayer = styled(Layer)`
+  background-image: ${({ theme }) => waveImage(theme.colors.paper)};
+  height: 70%;
+  animation: ${driftFront} 18s linear infinite;
+`;
 
 export default function Hero() {
   return (
@@ -225,12 +232,8 @@ export default function Hero() {
       </div>
 
       <Waves aria-hidden="true">
-        <svg viewBox="0 0 2880 100" preserveAspectRatio="none">
-          <path d={WAVE_PATH} fill="currentColor" />
-        </svg>
-        <svg viewBox="0 0 2880 100" preserveAspectRatio="none">
-          <path d={WAVE_PATH} fill="currentColor" />
-        </svg>
+        <BackLayer />
+        <FrontLayer />
       </Waves>
     </Wrap>
   );

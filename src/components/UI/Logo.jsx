@@ -1,19 +1,36 @@
 import { useId } from 'react';
 import styled, { useTheme } from 'styled-components';
 
+// Logotipo do manual de identidade: símbolo + "quem fica?" (Poppins Bold).
+// Proporções medidas na capa do manual, em relação ao tamanho do símbolo (--s):
+// texto com 1,05 vez o símbolo e espaço de 0,33 entre os dois.
+// Tamanho fixo em px, como uma marca: não cresce com o A+, para não empurrar o menu.
+// Em telas pequenas, o logotipo diminui (70% e, abaixo de 380 px, 60%).
+
 const Wrap = styled.span`
+  --s: ${({ $size }) => $size}px;
   display: inline-flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: calc(var(--s) * 0.33);
+
+  @media (max-width: 575.98px) {
+    --s: ${({ $size }) => $size * 0.7}px;
+  }
+
+  @media (max-width: 379.98px) {
+    --s: ${({ $size }) => $size * 0.6}px;
+  }
 `;
 
 const Word = styled.span`
   font-family: ${({ theme }) => theme.fonts.heading};
   font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: -0.02em;
+  font-size: calc(var(--s) * 1.05);
+  letter-spacing: 0;
   line-height: 1;
   white-space: nowrap;
+  position: relative;
+  top: calc(var(--s) * 0.03);
   color: ${({ $light, theme }) => ($light ? theme.colors.onDark : theme.colors.ink)};
 
   b {
@@ -22,44 +39,50 @@ const Word = styled.span`
   }
 `;
 
-// Símbolo: um "Q" de quem, com a casa, a janela âmbar (quem ainda fica)
-// e a onda aqua. `light` = versão para fundo escuro.
-export function Symbol({ size = 44, light = false }) {
+const Svg = styled.svg`
+  display: block;
+  flex-shrink: 0;
+  width: var(--s, ${({ $size }) => $size}px);
+  height: var(--s, ${({ $size }) => $size}px);
+`;
+
+// Símbolo: o "Q" de quem (anel e cauda), a casa, a janela âmbar (quem ainda fica)
+// e a água subindo. `light` = versão para fundo escuro.
+export function Symbol({ size = 40, light = false }) {
   const theme = useTheme();
   const uid = useId().replace(/:/g, '');
   const clipId = `marca-clip-${uid}`;
   const estrutura = light ? theme.brand.nevoa : theme.brand.navy;
 
   return (
-    <svg width={size} height={size} viewBox="0 0 64 64" aria-hidden="true" focusable="false">
+    <Svg $size={size} viewBox="0 0 64 64" aria-hidden="true" focusable="false">
       <defs>
         <clipPath id={clipId}>
-          <circle cx="29" cy="29" r="18.5" />
+          <circle cx="32" cy="32" r="25.1" />
         </clipPath>
       </defs>
-      {/* anel e cauda: o "Q" de quem */}
-      <circle cx="29" cy="29" r="21" fill="none" stroke={estrutura} strokeWidth="5.5" />
-      <line x1="44.5" y1="44.5" x2="55" y2="55" stroke={estrutura} strokeWidth="6" strokeLinecap="round" />
-      {/* água, recortada pelo anel */}
+      <circle cx="32" cy="32" r="29" fill="none" stroke={estrutura} strokeWidth="6" />
+      <line x1="51" y1="51" x2="57.6" y2="57.6" stroke={estrutura} strokeWidth="6.2" strokeLinecap="round" />
+      <path d="M32 23 L45 36 V54 H19 V36 Z" fill={estrutura} clipPath={`url(#${clipId})`} />
+      <rect x="28.4" y="30" width="7.2" height="7.4" rx="1.4" fill={theme.brand.ambar} />
       <path
-        d="M4 40 C12 36 20 44 29 40 S46 36 56 40 V60 H4 Z"
+        d="M5 37.4 C11 36.6 15 43.4 21.5 43.4 C28 43.4 32 37 38.8 36.6 C45 36.3 50 40 56 46 V64 H0 V37.4 Z"
         fill={theme.brand.aqua}
         clipPath={`url(#${clipId})`}
       />
-      {/* casa */}
-      <path d="M18 32 L29 22 L40 32 V42 H18 Z" fill={estrutura} />
-      {/* janela acesa */}
-      <rect x="26" y="31" width="6" height="6" rx="1" fill={theme.brand.ambar} />
-    </svg>
+    </Svg>
   );
 }
 
-// Logotipo: símbolo + "quem fica?" em minúsculas (Poppins Bold).
-export default function Logo({ light = false, size = 44 }) {
+export default function Logo({ light = false, size = 40 }) {
+  // No alto contraste o fundo é escuro: usa a versão clara do manual.
+  const theme = useTheme();
+  const claro = light || theme.name === 'alto-contraste';
+
   return (
-    <Wrap>
-      <Symbol size={size} light={light} />
-      <Word $light={light}>
+    <Wrap $size={size}>
+      <Symbol size={size} light={claro} />
+      <Word $light={claro}>
         quem fica<b>?</b>
       </Word>
     </Wrap>
