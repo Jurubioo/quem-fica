@@ -258,7 +258,7 @@ src/
 - É um **protótipo acadêmico**: o bairro e as famílias são fictícios, e os resultados não substituem as orientações da Defesa Civil.
 - Não há servidor nem login. Por isso, o cadastro de famílias ainda não existe, e os registros do formulário ficam só no navegador de quem preencheu.
 - Na página de impacto, a "cobertura depois" é uma estimativa simples: cada veículo a mais leva uma família. A página de simulação considera rotas, abrigos e necessidades de cada família.
-- O teste com leitores de tela (NVDA, VoiceOver ou TalkBack) por uma pessoa ainda precisa ser feito.
+
 
 ## Dados reais e fontes
 
