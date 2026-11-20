@@ -2,196 +2,277 @@
 
 > Planejar para ninguém ficar para trás.
 
-Plataforma de planejamento de evacuação inclusiva. Simula enchentes em um bairro e mostra, família por
-família, quem consegue chegar sozinho a um abrigo seguro e quem precisa de apoio.
+**Quem Fica?** é uma plataforma de planejamento de evacuação inclusiva. Ela simula uma enchente em um bairro e mostra, família por família, quem consegue chegar sozinho a um abrigo seguro e quem vai precisar de ajuda. A ideia é descobrir isso **antes** de a água chegar, para que ninguém seja esquecido no plano de evacuação.
 
-Global Solution FIAP 2026/2 · CitizenTech · 1º ano de Engenharia de Software.
+Projeto da Global Solution FIAP 2026/2 (tema CitizenTech), do 1º ano de Engenharia de Software.
 
 ## Vídeo pitch
 
-[PREENCHER: link público do vídeo no YouTube, Google Drive ou Vimeo. Testar numa aba anônima.]
+https://youtu.be/xM6bx-xUjdI
 
-## O problema e a solução
+## Sumário
 
-- **Cidadão beneficiado:** famílias com pessoas idosas, pessoas com deficiência, pessoas com mobilidade
-  reduzida ou sem transporte próprio, que moram em áreas sujeitas a enchentes.
-- **Problema:** em uma enchente, essas famílias muitas vezes não conseguem sair sozinhas, e os planos de
-  evacuação nem sempre consideram isso. Nas enchentes de 2024 no Rio Grande do Sul, 2,4 milhões de pessoas
-  foram afetadas (Defesa Civil do RS).
-- **Solução:** uma simulação que cruza as necessidades de cada família com abrigos, rotas e veículos e
-  mostra quem precisa de apoio antes de a água chegar.
-- **ODS:** 10 (redução das desigualdades), 11 (cidades e comunidades sustentáveis) e 13 (ação contra a
-  mudança global do clima).
+1. [O problema](#o-problema)
+2. [A solução](#a-solução)
+3. [Integrantes](#integrantes)
+4. [Como abrir o site](#como-abrir-o-site)
+5. [Como usar](#como-usar)
+6. [Como a simulação decide](#como-a-simulação-decide)
+7. [Formulário de participação](#formulário-de-participação)
+8. [Cadastro de famílias: quem pode fazer](#cadastro-de-famílias-quem-pode-fazer)
+9. [Dados e privacidade](#dados-e-privacidade)
+10. [Acessibilidade](#acessibilidade)
+11. [Identidade visual](#identidade-visual)
+12. [Tecnologias](#tecnologias)
+13. [Requisitos da Global Solution](#requisitos-da-global-solution)
+14. [Roteiro de testes](#roteiro-de-testes)
+15. [Como executar o código-fonte](#como-executar-o-código-fonte)
+16. [Estrutura de pastas](#estrutura-de-pastas)
+17. [Limitações](#limitações)
+18. [Dados reais e fontes](#dados-reais-e-fontes)
+19. [Uso de inteligência artificial](#uso-de-inteligência-artificial)
+
+## O problema
+
+Quando um alerta de enchente chega, a maior parte das pessoas pega o carro ou sai a pé. Mas algumas famílias **não conseguem sair sozinhas**: quem tem pessoas idosas, pessoas com deficiência, alguém com mobilidade reduzida ou quem não tem transporte. Se ninguém sabe onde essas famílias estão e do que elas precisam, elas ficam para trás.
+
+O tamanho do problema é real. Nas enchentes de 2024 no Rio Grande do Sul, **2,4 milhões de pessoas** foram afetadas, em 478 municípios. E no Brasil, **47,2% das pessoas com deficiência têm 60 anos ou mais**, o grupo que mais depende de ajuda para deixar a casa. As fontes estão em [Dados reais e fontes](#dados-reais-e-fontes).
+
+**Quem é o cidadão beneficiado:** famílias que moram em áreas sujeitas a enchentes e que têm pessoas idosas, pessoas com deficiência, pessoas com mobilidade reduzida ou não têm transporte próprio.
+
+## A solução
+
+O Quem Fica? cruza três informações:
+
+- **as necessidades de cada família** (quantas pessoas, idosos, pessoas com deficiência, mobilidade, carro);
+- **os abrigos** (onde ficam, se estão fora da água, se têm vagas, se são acessíveis);
+- **as rotas e os veículos** (se a estrada está liberada, se há van, se a van é adaptada).
+
+Com isso, para cada nível de enchente, o sistema mostra quem tem uma saída segura e quem não tem, e explica o motivo. Quem organiza a evacuação (Defesa Civil, voluntários, agentes comunitários) sabe com antecedência onde mandar ajuda.
+
+**Objetivos de Desenvolvimento Sustentável (ODS) da ONU:**
+
+| ODS | Como o projeto contribui |
+| --- | --- |
+| 10 · Redução das desigualdades | Olha primeiro para quem tem mais dificuldade de sair: idosos e pessoas com deficiência. |
+| 11 · Cidades e comunidades sustentáveis | Ajuda a planejar evacuações mais seguras nos bairros. |
+| 13 · Ação contra a mudança global do clima | Prepara a comunidade para enchentes, que estão ficando mais frequentes. |
 
 ## Integrantes
 
-| Nome                   | RM     | Responsabilidade principal                                                         |
-| ---------------------- | ------ | ---------------------------------------------------------------------------------- |
-| Julia Rubio Fernandes  | 569418 | Estrutura do projeto, rotas, layout e página inicial.                             |
+| Nome                   | RM     | Responsabilidade principal                                                             |
+| ---------------------- | ------ | -------------------------------------------------------------------------------------- |
+| Julia Rubio Fernandes  | 569418 | Estrutura do projeto, rotas, layout e página inicial.                                 |
 | Arthur Mairink         | 569745 | Mapa interativo, visualização das famílias, motor de simulação e regras de evacuação. |
-| Rodrigo Sobral Moreira | 561620 | Cadastro de recursos, formulários e dashboard de impacto.                         |
-| Gabriela Donato        | 571773 | Página da equipe, acessibilidade, testes, README e pitch.                         |
+| Rodrigo Sobral Moreira | 561620 | Cadastro de recursos, formulários e dashboard de impacto.                             |
+| Gabriela Donato        | 571773 | Página da equipe, acessibilidade, testes, README e pitch.                             |
 
-## Como abrir
+## Como abrir o site
 
-**Não é preciso instalar nada.** Na pasta entregue, abra o arquivo `index.html` com dois cliques. O site
-abre direto no navegador (Chrome, Edge ou Firefox).
+**Não é preciso instalar nada.**
 
-As fontes (Poppins e Inter) vêm da internet. Sem conexão, o site funciona normalmente com uma fonte padrão
-do sistema.
+1. Extraia o arquivo `.zip` da entrega.
+2. Entre na pasta `quem-fica`.
+3. Dê dois cliques no arquivo `index.html`.
 
-## Como executar o código-fonte
+O site abre no navegador (Chrome, Edge ou Firefox), no computador ou no celular. As fontes vêm da internet; sem conexão, o site funciona igual, só com uma fonte padrão do sistema.
 
-O código-fonte em React fica na pasta `codigo-fonte` da entrega (ou na raiz do repositório no GitHub).
-É preciso ter o Node.js 20.19 ou mais recente.
+> **Atenção:** o `index.html` que abre direto é o da pasta da entrega. O `index.html` da raiz do repositório no GitHub é o ponto de partida do código e só funciona depois de gerar o site (veja [Como executar o código-fonte](#como-executar-o-código-fonte)).
 
-```bash
-cd codigo-fonte
-npm install
-npm run dev      # servidor de desenvolvimento em http://localhost:5173
-npm run build    # gera a versão final na pasta dist (index.html, css, js e img)
-```
+## Como usar
 
-## Páginas
+O site tem quatro páginas, com o mesmo menu em todas:
 
-| Endereço                 | Página    | O que tem                                                           | Responsável            |
-| ------------------------ | --------- | ------------------------------------------------------------------- | ---------------------- |
-| `index.html#/`           | Início    | O problema, dados reais com fonte, como funciona e os ODS.          | Julia Rubio Fernandes  |
-| `index.html#/simulacao`  | Simulação | Mapa do bairro, níveis de alagamento e resultado de cada família.  | Arthur Mairink         |
-| `index.html#/impacto`    | Impacto   | Indicadores de cobertura e impacto, com cadastro de recursos.      | Rodrigo Sobral Moreira |
-| `index.html#/equipe`     | Equipe    | Integrantes, tecnologias e formulário de participação.            | Gabriela Donato        |
+| Página    | Para que serve | Responsável |
+| --------- | -------------- | ----------- |
+| Início    | Explica o problema com dados reais, mostra como o Quem Fica? funciona e traz uma demonstração de uma rua com 5 famílias, em que você sobe o nível da água e vê quem consegue sair. | Julia |
+| Simulação | A parte principal. Mostra o mapa do bairro com as 15 famílias. Você escolhe o nível de alagamento, clica em **Executar simulação** e vê o resultado de cada família, com o motivo. Dá para filtrar por região, necessidade e situação, e clicar em uma família para ver os detalhes. | Arthur |
+| Impacto   | Mostra o que muda quando o bairro ganha recursos. Você altera famílias afetadas, famílias sem transporte, vagas e veículos, clica em **Atualizar cenário** e vê a cobertura antes e depois. O botão **Restaurar valores do cenário** volta aos dados originais. | Rodrigo |
+| Equipe    | Apresenta o projeto, as tecnologias e os integrantes, e traz o formulário para quem quer participar. | Gabriela |
 
-O menu é o mesmo em todas as páginas. Um endereço que não existe mostra uma página de aviso, com link para
-o início.
+Se alguém digitar um endereço que não existe, aparece uma página de aviso com um link para voltar ao início.
 
-## Como a simulação funciona
+## Como a simulação decide
 
-O bairro tem quatro regiões, abrigos e veículos fictícios. Os dados ficam em `src/data/cenario.json`: um
-array de objetos com 15 famílias, cada uma com número de moradores, pessoas idosas, pessoas com
-deficiência, mobilidade reduzida e condição de transporte.
+O bairro do protótipo se chama **Bairro Esperança** e é fictício. Ele tem:
 
-A pessoa escolhe o nível de alagamento e executa a simulação. Para cada família atingida, o sistema procura
-um abrigo ativo, fora da água, com rota liberada, vagas e, quando necessário, acessível. Depois, verifica
-como ela chega até lá: transporte próprio, a pé (em distâncias curtas e sem necessidades de apoio) ou em um
-veículo da região, adaptado quando preciso. Se nenhuma opção funciona, a família aparece como **sem
-alternativa segura**, com o motivo.
+- **4 regiões:** Vila do Rio, Centro, Jardim das Pontes e Colina Verde;
+- **15 famílias**, cada uma com número de moradores, pessoas idosas, pessoas com deficiência, mobilidade
+  reduzida e informação sobre transporte;
+- **3 abrigos:** Escola do Rio (acessível), Ginásio Central e Centro da Colina (acessível);
+- **5 veículos**, sendo 2 adaptados para cadeira de rodas.
 
-Na página de impacto, os indicadores (cobertura antes e depois e impacto) são recalculados quando a pessoa
-altera os recursos: famílias afetadas, famílias sem transporte, vagas em abrigos e veículos disponíveis.
+Há quatro níveis de enchente: **sem alagamento, baixo, moderado e grave**. Quanto mais alto o nível, mais regiões ficam alagadas, mais rotas fecham e alguns abrigos deixam de poder ser usados.
 
-## Tecnologias
+Para cada família atingida, o sistema segue estes passos:
 
-- HTML semântico, CSS (media queries, flexbox e grid) e JavaScript.
-- React (componentes, props, `useState` e `useEffect`) e React Router.
-- Styled Components, para os estilos.
-- React Hook Form, no formulário de participação.
-- Bootstrap (grid e containers).
-- SVG para o mapa, as ilustrações e os ícones.
-- Vite, para gerar a versão final.
+1. **Procura um abrigo** que esteja funcionando, fora da água, com a rota liberada e com vagas para a família inteira. Se na família há alguém com deficiência ou mobilidade reduzida, o abrigo precisa ser acessível.
+2. **Procura um jeito de chegar lá:**
+   - com o carro da própria família;
+   - a pé, só se o abrigo estiver a até 1,5 km e ninguém na família precisar de apoio (pessoas idosas, por exemplo, nunca são mandadas a pé);
+   - em um veículo da região, que precisa ser adaptado quando há alguém com deficiência ou mobilidade reduzida.
+3. **Mostra o resultado** com ícone, cor e texto:
+   - **Consegue sair:** existe uma alternativa segura, e o sistema diz qual.
+   - **Sem alternativa segura:** nenhuma opção funciona, e o sistema diz o motivo (falta de abrigo acessível, de vagas, de veículo adaptado, rota bloqueada etc.).
+   - **Fora da área alagada:** a região da família não foi atingida naquele nível.
 
-## Requisitos do projeto
-
-| Requisito                          | Onde está                                                                        |
-| ---------------------------------- | -------------------------------------------------------------------------------- |
-| 01 · Página inicial com o problema | Início: cidadão, problema, dados reais com fonte, proposta e ODS 10, 11 e 13.   |
-| 02 · Navegação                     | Quatro páginas com o mesmo menu, escritas com HTML semântico.                   |
-| 03 · Simulação interativa          | Simulação: array de 15 famílias, exibidas no mapa e em cartões após a ação.     |
-| 04 · Formulário com validação      | Equipe: erros e mensagem de sucesso na própria página, sem `alert()`.           |
-| 05 · Responsividade                | Media queries, flexbox e grid; funciona no celular e no desktop.                |
-| 06 · Acessibilidade                | Tags semânticas, `alt` nas imagens, `label` nos campos, contraste e teclado.     |
-| 07 · Código e README               | Pastas `css`, `js` e `img`, sem CSS inline, e este README.                      |
+O sistema **nunca separa uma família**: ela só é considerada atendida se houver lugar para todos juntos.
 
 ## Formulário de participação
 
-Fica na página da equipe. Usa React Hook Form e valida os campos obrigatórios: nome, e-mail, forma de
-participação e consentimento. Os erros aparecem ao lado de cada campo e em um resumo no topo, e o foco vai
-para o primeiro campo com erro. Ao enviar, uma mensagem de sucesso aparece na própria página.
+Fica no fim da página **Equipe**. É por ele que uma pessoa diz que quer ajudar o projeto: como moradora, como representante de um órgão público, de uma ONG ou empresa, como voluntária ou de outra forma.
 
-O projeto não tem servidor. As respostas ficam guardadas só no navegador de quem preenche
-(`localStorage`), e a pessoa pode apagá-las na mesma página.
+- **Campos obrigatórios:** nome, e-mail, forma de participação e a confirmação de consentimento.
+- **Campos opcionais:** bairro ou município, interesses, quantas famílias da região precisam de apoio e uma mensagem.
+- **Validação:** se faltar algo ou houver erro (por exemplo, um e-mail sem domínio), a mensagem aparece ao lado do campo e em um resumo no topo, e o cursor vai para o primeiro campo com erro. Nada usa janelas de `alert()`.
+- **Envio:** ao enviar, aparece uma mensagem de sucesso na própria página. A pessoa pode apagar o que enviou ali mesmo, com confirmação.
+
+## Cadastro de famílias: quem pode fazer
+
+O site **não tem um cadastro de famílias aberto ao público**, e essa foi uma decisão da equipe.
+
+Os dados de uma família incluem informações sensíveis, como deficiência, idade e mobilidade. Pela Lei Geral de Proteção de Dados (LGPD), dados de saúde são sensíveis e exigem cuidado redobrado. Além disso, um cadastro aberto poderia receber informações inventadas ou repetidas, e isso mudaria a simulação usada para planejar a evacuação de verdade.
+
+Por isso, o cadastro de famílias fica reservado para **pessoas treinadas que fazem parte da organização**: voluntários capacitados, agentes da Defesa Civil, agentes comunitários de saúde e assistentes sociais. O caminho previsto é:
+
+1. A pessoa se registra pelo **formulário de participação**, para que a equipe saiba quem ela é e de onde ela vem.
+2. Depois de aprovada e orientada, ela recebe acesso ao cadastro de famílias.
+3. O cadastro é feito **junto com a família e com o consentimento dela**.
+
+Assim, toda informação sobre uma família tem origem conhecida. No protótipo, essa etapa está descrita e ainda não foi construída; na versão real, o acesso seria protegido por login.
+
+## Dados e privacidade
+
+- O projeto **não tem servidor**. O que alguém preenche no formulário fica guardado só no navegador dessa pessoa e não é enviado para a equipe.
+- O formulário pede só o necessário para contato (nome e e-mail) e exige o consentimento antes de salvar.
+- As famílias, os abrigos e os veículos da simulação são **fictícios**. Nenhuma pessoa real aparece no site.
+- As preferências de acessibilidade (tamanho do texto e alto contraste) também ficam só no navegador.
 
 ## Acessibilidade
 
-- Link "Pular para o conteúdo", que aparece ao apertar Tab.
-- Barra com **A− / A / A+** (até 137,5%) e **alto contraste**, salvos no navegador.
-- Fontes Poppins (títulos) e Inter (textos), da identidade visual do projeto. Texto base de 18px.
-- Menu com `aria-current`, botão "Menu" com texto, `aria-expanded` e fechamento com Esc.
-- Foco visível em qualquer fundo. Ao trocar de página, o foco vai para o conteúdo.
-- Animações desligadas para quem ativa "reduzir movimento" no sistema.
-- Áreas de toque com no mínimo 44px. O controle do nível da água também tem botões − e +.
-- Cores sempre acompanhadas de ícone e texto: nenhum estado depende só da cor.
+O Quem Fica? é sobre pessoas que costumam ser esquecidas, então o site também precisa funcionar para elas.
+
+- **Teclado:** dá para usar o site inteiro só com Tab, Shift+Tab e Enter. O primeiro Tab mostra o link **Pular para o conteúdo**, e o foco sempre aparece com um contorno bem visível.
+- **Tamanho do texto:** os botões **A−**, **A** e **A+**, no topo, mudam o tamanho de tudo (até 137,5%).
+- **Alto contraste:** o botão **Contraste** deixa o fundo escuro e o texto claro, usando só as cores da identidade visual.
+- **Leitores de tela:** páginas com títulos em ordem, regiões marcadas (cabeçalho, menu, conteúdo e rodapé), texto alternativo nas fotos e nomes claros em todos os botões e campos.
+- **Cores com significado:** nenhuma informação depende só da cor. Toda situação tem também ícone e texto.
+- **Celular:** áreas de toque com pelo menos 44 pixels e nada escapando da tela.
+- **Movimento:** quem ativa "reduzir movimento" no sistema vê as animações paradas.
+- **Formulários:** todo campo tem rótulo visível, e os erros explicam como corrigir.
+
+As páginas foram verificadas com a ferramenta axe-core, nas regras de acessibilidade WCAG 2.2 (níveis A e AA), nos temas claro e de alto contraste, sem nenhum problema encontrado.
+
+## Identidade visual
+
+O site segue o manual de marca **Quem Fica? · Identidade Visual**.
+
+- **Símbolo:** um "Q" de **quem**, com uma casa dentro (cada família), a janela acesa em âmbar (quem ainda está lá dentro) e a água subindo em azul-aqua (a enchente).
+- **Cores:**
+
+  | Cor | Código | Uso |
+  | --- | --- | --- |
+  | Navy Profundo | `#0B1F3A` | Fundos, logotipo e textos |
+  | Azul Maré | `#0E7490` | Botões, links e destaques |
+  | Aqua | `#22D3EE` | Água, brilho e a interrogação em fundo escuro |
+  | Âmbar | `#FBBF24` | Luz de alerta: quem ainda fica |
+  | Névoa | `#F4F8FB` | Fundos claros |
+
+- **Fontes:** Poppins nos títulos e no logotipo; Inter nos textos.
+- Verde e vermelho aparecem só para indicar situação (consegue sair ou pode ficar para trás) e não fazem parte da marca.
+
+## Tecnologias
+
+Somente tecnologias vistas no curso:
+
+- **HTML semântico**, **CSS** (media queries, flexbox e grid) e **JavaScript**;
+- **React**, com componentes, props, `useState` e `useEffect`;
+- **React Router**, para as páginas;
+- **Styled Components**, para os estilos;
+- **React Hook Form**, no formulário de participação;
+- **Bootstrap**, para a grade e os contêineres;
+- **SVG**, no mapa, nos ícones e nas ilustrações;
+- **Vite**, para gerar a versão final do site.
+
+## Requisitos da Global Solution
+
+| Requisito | Onde está no projeto |
+| --- | --- |
+| 01 · Página inicial com o problema | Início: cidadão, problema, dados reais com fonte, proposta e ODS 10, 11 e 13. |
+| 02 · Navegação | Quatro páginas (Início, Simulação, Impacto e Equipe) com o mesmo menu, escritas com HTML semântico. |
+| 03 · Simulação interativa | Simulação: a pessoa escolhe o nível e executa; os dados são um array com 15 famílias, exibidas no mapa e em cartões. |
+| 04 · Formulário com validação | Equipe: campos obrigatórios validados, com erros e sucesso na própria página, sem `alert()`. |
+| 05 · Responsividade | Media queries, flexbox e grid; funciona no celular e no computador. |
+| 06 · Acessibilidade | Tags semânticas, `alt` nas imagens, rótulo em todos os campos, contraste e navegação completa pelo teclado. |
+| 07 · Código e README | Pastas `css`, `js` e `img`, nenhum CSS inline e este README. |
+
+Diferenciais: alto contraste e ajuste do tamanho do texto, mensagens claras em cada ação e nenhuma página sem saída.
 
 ## Roteiro de testes
 
-Abrindo o `index.html` direto no navegador:
+Testes feitos pela equipe, abrindo o `index.html` direto no navegador:
 
-1. **Navegação:** abrir cada item do menu e conferir que todas as páginas carregam. Abrir um endereço que
-   não existe (por exemplo, `index.html#/teste`) e conferir a página de aviso.
-2. **Simulação:** escolher cada nível de alagamento, clicar em Executar simulação e conferir o resultado
-   de cada família no mapa e nos cartões.
-3. **Impacto:** alterar os recursos e conferir que os indicadores mudam.
-4. **Formulário:** enviar vazio (os erros devem aparecer na página), corrigir e enviar (deve aparecer a
-   mensagem de sucesso). Apagar os registros.
-5. **Teclado:** navegar só com Tab, Shift+Tab e Enter, inclusive pelo "Pular para o conteúdo".
-6. **Acessibilidade:** testar o alto contraste e os botões A− e A+.
-7. **Celular:** repetir a navegação em uma tela pequena (ou no modo celular do navegador).
+1. **Navegação:** abrir cada item do menu e ver se a página certa carrega. Abrir `index.html#/teste` e ver a página de aviso.
+2. **Simulação:** escolher cada um dos quatro níveis, clicar em **Executar simulação** e conferir o resultado de cada família. Usar os filtros e o botão **Limpar filtros**.
+3. **Impacto:** mudar os valores, clicar em **Atualizar cenário** e ver os indicadores mudarem. Digitar um número negativo e ver a mensagem de erro. Clicar em **Restaurar valores do cenário**.
+4. **Formulário:** enviar vazio e ver os erros; corrigir, enviar e ver a mensagem de sucesso; apagar o registro.
+5. **Teclado:** usar o site só com Tab, Shift+Tab e Enter.
+6. **Acessibilidade:** testar o **Contraste** e os botões **A−** e **A+**.
+7. **Celular:** repetir a navegação em uma tela pequena.
 
-## Estrutura
+## Como executar o código-fonte
+
+Para quem quer ver ou alterar o código. Na entrega, ele está na pasta `codigo-fonte`; no GitHub, na raiz do repositório. É preciso ter o **Node.js 20.19 ou mais recente**.
+
+```bash
+cd codigo-fonte      # no GitHub, entre na pasta do repositório
+npm install          # instala as bibliotecas
+npm run dev          # abre o site em http://localhost:5173
+npm run build        # gera o site pronto na pasta dist (index.html, css, js e img)
+```
+
+A pasta `dist` gerada pelo `npm run build` é o site que abre com dois cliques. Ela pode ser publicada em qualquer hospedagem de sites estáticos, como GitHub Pages ou Vercel.
+
+## Estrutura de pastas
 
 ```
-index.html
+index.html                 ponto de partida do código
 public/
   favicon.svg              ícone do site
   img/equipe/              fotos dos integrantes
 src/
-  components/
-    Header/ Footer/ Layout/   estrutura comum a todas as páginas
-    UI/                       Button, Section, PageIntro, Logo e ComingSoon
-    Icons/                    ícones em SVG
-    Map/ Family/              mapa do bairro e cartões das famílias
-    Participacao/ Registros/  formulário de participação e registros salvos
-  context/AccessibilityContext.jsx   tamanho do texto e alto contraste
-  data/cenario.json        dados fictícios (15 famílias, abrigos e veículos)
+  components/              partes reaproveitadas: cabeçalho, rodapé, mapa, cartões, formulário, botões
+  context/                 tamanho do texto e alto contraste
+  data/cenario.json        o bairro fictício: 15 famílias, abrigos, veículos e regiões
   data/equipe.js           integrantes, RM, responsabilidades e tecnologias
-  hooks/                   usePageTitle, useScenario e useSimulation
-  pages/                   Home, Simulation, Impact, Team e NotFound
-  routes/                  rotas (AppRoutes.jsx) e itens do menu (navigation.js)
-  services/                carregamento do cenário e do formulário
-  styles/                  tema (cores e fontes) e estilos globais
-  utils/                   motor de simulação, regras, cálculos e validações
+  hooks/                   funções do React reaproveitadas
+  pages/                   as páginas: Início, Simulação, Impacto, Equipe e página de aviso
+  routes/                  as rotas e os itens do menu
+  services/                carregamento do cenário e registros do formulário
+  styles/                  cores, fontes e estilos gerais
+  utils/                   motor da simulação, regras de evacuação, cálculos e validações
 ```
 
-## Guia rápido para a equipe
+## Limitações
 
-- **Nova página:** crie em `src/pages/`, registre em `routes/AppRoutes.jsx` e, se for para o menu, em
-  `routes/navigation.js`. Use `<PageIntro>` no topo e chame `usePageTitle('Nome')`.
-- **Cores e fontes:** nunca escreva hexadecimal no componente. Use o tema:
-  `` color: ${({ theme }) => theme.colors.ink}; ``. Assim o modo de alto contraste funciona sozinho.
-- **Tamanhos:** use `rem`, não `px`, para que o botão "A+" aumente tudo junto.
-- **Botões:** `<ButtonLink to="/rota">` ou `<Button type="submit">` (variantes: `primary`, `light`, `dark`).
-- **Estados da simulação:** `safe` (verde), `risk` (vermelho) e `neutral`, sempre com ícone e texto.
-- **Grid:** use as classes do Bootstrap (`container`, `row`, `col-12 col-lg-6`, `g-4`).
-- **Estilos:** sem CSS inline (`style={{...}}`). Use componentes do Styled Components.
-
-## Publicação
-
-Como as rotas ficam depois do `#`, o site funciona em qualquer hospedagem de arquivos estáticos, como o
-GitHub Pages ou a Vercel: basta publicar o conteúdo da pasta `dist`.
+- É um **protótipo acadêmico**: o bairro e as famílias são fictícios, e os resultados não substituem as orientações da Defesa Civil.
+- Não há servidor nem login. Por isso, o cadastro de famílias ainda não existe, e os registros do formulário ficam só no navegador de quem preencheu.
+- Na página de impacto, a "cobertura depois" é uma estimativa simples: cada veículo a mais leva uma família. A página de simulação considera rotas, abrigos e necessidades de cada família.
+- O teste com leitores de tela (NVDA, VoiceOver ou TalkBack) por uma pessoa ainda precisa ser feito.
 
 ## Dados reais e fontes
 
-- **2,4 milhões** de pessoas afetadas pelas enchentes de 2024 no RS, em 478 municípios.
+- **2,4 milhões** de pessoas afetadas pelas enchentes de 2024 no Rio Grande do Sul, em 478 municípios.
   Fonte: [Defesa Civil do RS, balanço de 10/06/2024](https://estado.rs.gov.br/defesa-civil-atualiza-balanco-das-enchentes-no-rs-10-6-9h).
-- **47,2%** das pessoas com deficiência no Brasil têm 60 anos ou mais; 18,6 milhões de pessoas com deficiência.
+- **47,2%** das pessoas com deficiência no Brasil têm 60 anos ou mais; são 18,6 milhões de pessoas com deficiência no país.
   Fonte: [IBGE, PNAD Contínua 2022](https://agenciadenoticias.ibge.gov.br/agencia-noticias/2012-agencia-de-noticias/noticias/37317-pessoas-com-deficiencia-tem-menor-acesso-a-educacao-ao-trabalho-e-a-renda).
 
-As famílias, os abrigos e os veículos do protótipo são **fictícios**. Os resultados são estimativas e não
-substituem as orientações da Defesa Civil.
+## Uso de inteligência artificial
 
-## Uso de IA generativa
+A equipe usou ferramentas de inteligência artificial generativa como apoio no projeto. Todo o conteúdo gerado foi revisado pelo grupo, e cada integrante conhece e sabe explicar a parte que desenvolveu.
 
-| Ferramenta        | Para quê                                                                      |
-| ----------------- | ----------------------------------------------------------------------------- |
-| ChatGPT (OpenAI)  | Roteiro do vídeo pitch, criação de prompts e de imagens, e pesquisas.        |
-| Google Flow       | Geração das imagens usadas no vídeo pitch.                                   |
-| Claude (Anthropic)| Desenvolvimento, conferência e correção de código, e pesquisas.              |
+| Ferramenta | Para quê |
+| --- | --- |
+| ChatGPT (OpenAI) | Desenvolvimento do roteiro do vídeo pitch, criação de prompts e de imagens, pesquisas, explicações e orientações durante o projeto. |
+| Claude (Anthropic) | Desenvolvimento do roteiro do vídeo pitch, organização e correção do código, naração do vídeo, explicações, pesquisas, orientações e testes do sistema. |
+| Google Flow | Geração das imagens usadas no vídeo pitch. |
